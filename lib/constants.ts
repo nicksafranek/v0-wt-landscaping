@@ -1,5 +1,5 @@
-import { GiLawnMower, GiWheelbarrow, GiBush, GiRake, GiSnowflake2 } from 'react-icons/gi'
-import type { IconType } from 'react-icons'
+import { Tractor, Shovel, Shrub, Leaf, Snowflake } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
 // Business Information - Centralized for easy editing
 export const BUSINESS_INFO = {
@@ -54,7 +54,7 @@ export interface Service {
   slug: string
   title: string
   description: string
-  icon: IconType
+  icon: LucideIcon
 }
 
 export const SERVICES: Service[] = [
@@ -63,35 +63,35 @@ export const SERVICES: Service[] = [
     slug: "lawn-mowing",
     title: "Lawn Mowing & Edging",
     description: "Precision cuts and crisp edges for a manicured look in the Cleveland suburbs.",
-    icon: GiLawnMower,
+    icon: Tractor,
   },
   {
     id: "mulch",
     slug: "mulch",
     title: "Mulch Installation",
     description: "Premium double-shredded mulch delivered and installed in Kent, Stow, and Aurora.",
-    icon: GiWheelbarrow,
+    icon: Shovel,
   },
   {
     id: "trimming",
     slug: "trimming",
     title: "Hedge Trimming",
     description: "Professional pruning and shaping to enhance your property's curb appeal and plant health.",
-    icon: GiBush,
+    icon: Shrub,
   },
   {
     id: "cleanups",
     slug: "cleanups",
     title: "Seasonal Cleanups",
     description: "Comprehensive leaf removal and bed clearing for Spring and Fall readiness in Kent, Stow, and Aurora.",
-    icon: GiRake,
+    icon: Leaf,
   },
   {
     id: "snow",
     slug: "snow",
     title: "Snow Removal",
     description: "Reliable 24/7 driveway and sidewalk clearing for safe winter access in the Cleveland area.",
-    icon: GiSnowflake2,
+    icon: Snowflake,
   },
 ] as const
 

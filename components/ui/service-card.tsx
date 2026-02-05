@@ -34,8 +34,8 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
           />
           <div className="relative w-full h-full rounded-full bg-orange/10 group-hover:bg-orange/20 flex items-center justify-center transition-colors duration-300">
             <Icon 
-              size={28}
-              className="text-orange transition-transform duration-300 group-hover:scale-110" 
+              className="w-7 h-7 text-orange transition-transform duration-300 group-hover:scale-110" 
+              strokeWidth={1.5}
               aria-hidden="true" 
             />
           </div>
