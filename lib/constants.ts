@@ -78,7 +78,7 @@ export const SERVICES: Service[] = [
   {
     id: "cleanups",
     title: "Seasonal Cleanups",
-    description: "Comprehensive leaf removal and bed clearing for Spring and Fall readiness.",
+    description: "Comprehensive leaf removal and bed clearing for Spring and Fall readiness in Kent, Stow, and Aurora.",
     icon: Sparkles,
   },
   {
