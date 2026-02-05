@@ -134,9 +134,9 @@ export const TESTIMONIALS: Testimonial[] = [
 // Navigation Links
 export const NAV_LINKS = [
   { label: "Services", href: "/services" },
-  { label: "Service Areas", href: "#areas" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Service Areas", href: "/service-areas" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
 ] as const
 
 // Animation Variants for Framer Motion

@@ -74,11 +74,11 @@ export function ServiceAreas() {
                 <Leaf className="w-5 h-5 text-orange" aria-hidden="true" />
               </div>
               <h3 className="font-serif text-2xl text-foreground tracking-wide">
-                Specialty Mulching Service
+                Mulch & Seasonal Cleanups
               </h3>
             </div>
             <p className="text-muted-foreground text-sm mb-6">
-              Premium double-shredded mulch delivery and professional installation.
+              Premium mulch installation and professional spring/fall cleanup services.
             </p>
             <div className="flex flex-wrap gap-2">
               {SERVICE_AREAS.mulchOnly.map((city) => (
