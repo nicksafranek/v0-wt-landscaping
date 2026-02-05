@@ -1,5 +1,5 @@
-import { Scissors, Leaf, TreeDeciduous, Sparkles, Snowflake } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
+import { GiLawnMower, GiWheelbarrow, GiBush, GiRake, GiSnowflake2 } from 'react-icons/gi'
+import type { IconType } from 'react-icons'
 
 // Business Information - Centralized for easy editing
 export const BUSINESS_INFO = {
@@ -51,41 +51,47 @@ export function cityToSlug(city: string): string {
 // Services Configuration
 export interface Service {
   id: string
+  slug: string
   title: string
   description: string
-  icon: LucideIcon
+  icon: IconType
 }
 
 export const SERVICES: Service[] = [
   {
     id: "mowing",
+    slug: "lawn-mowing",
     title: "Lawn Mowing & Edging",
     description: "Precision cuts and crisp edges for a manicured look in the Cleveland suburbs.",
-    icon: Scissors,
+    icon: GiLawnMower,
   },
   {
     id: "mulch",
+    slug: "mulch",
     title: "Mulch Installation",
     description: "Premium double-shredded mulch delivered and installed in Kent, Stow, and Aurora.",
-    icon: Leaf,
+    icon: GiWheelbarrow,
   },
   {
     id: "trimming",
+    slug: "trimming",
     title: "Hedge Trimming",
     description: "Professional pruning and shaping to enhance your property's curb appeal and plant health.",
-    icon: TreeDeciduous,
+    icon: GiBush,
   },
   {
     id: "cleanups",
+    slug: "cleanups",
     title: "Seasonal Cleanups",
     description: "Comprehensive leaf removal and bed clearing for Spring and Fall readiness in Kent, Stow, and Aurora.",
-    icon: Sparkles,
+    icon: GiRake,
   },
   {
     id: "snow",
+    slug: "snow",
     title: "Snow Removal",
     description: "Reliable 24/7 driveway and sidewalk clearing for safe winter access in the Cleveland area.",
-    icon: Snowflake,
+    icon: GiSnowflake2,
   },
 ] as const
 
