@@ -93,14 +93,14 @@ export function Footer() {
             <div className="aspect-square rounded-lg overflow-hidden bg-white/10">
               {/* Google Maps Embed Placeholder */}
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95888.58589892!2d-81.42!3d41.15!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8830d7958b2efab7%3A0x29c96c82f7c0d0e6!2sKent%2C%20OH%2044240!5e0!3m2!1sen!2sus!4v1"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d190000!2d-81.55!3d41.35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8830e5b0c4b4d3c7%3A0x8e5f7c7d7a7c7d7a!2sNorth%20Royalton%2C%20OH!5e0!3m2!1sen!2sus!4v1"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="WT Landscaping service area map"
+                title="WT Landscaping service area map centered on North Royalton"
               />
             </div>
           </div>

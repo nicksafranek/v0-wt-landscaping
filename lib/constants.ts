@@ -1,4 +1,4 @@
-import { Scissors, Leaf, TreeDeciduous, Sparkles, Snowflake } from 'lucide-react'
+import { Tractor, Shovel, Shrub, Leaf, Snowflake } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 // Business Information - Centralized for easy editing
@@ -51,6 +51,7 @@ export function cityToSlug(city: string): string {
 // Services Configuration
 export interface Service {
   id: string
+  slug: string
   title: string
   description: string
   icon: LucideIcon
@@ -59,30 +60,35 @@ export interface Service {
 export const SERVICES: Service[] = [
   {
     id: "mowing",
+    slug: "lawn-mowing",
     title: "Lawn Mowing & Edging",
     description: "Precision cuts and crisp edges for a manicured look in the Cleveland suburbs.",
-    icon: Scissors,
+    icon: Tractor,
   },
   {
     id: "mulch",
+    slug: "mulch",
     title: "Mulch Installation",
     description: "Premium double-shredded mulch delivered and installed in Kent, Stow, and Aurora.",
-    icon: Leaf,
+    icon: Shovel,
   },
   {
     id: "trimming",
+    slug: "trimming",
     title: "Hedge Trimming",
     description: "Professional pruning and shaping to enhance your property's curb appeal and plant health.",
-    icon: TreeDeciduous,
+    icon: Shrub,
   },
   {
     id: "cleanups",
+    slug: "cleanups",
     title: "Seasonal Cleanups",
-    description: "Comprehensive leaf removal and bed clearing for Spring and Fall readiness.",
-    icon: Sparkles,
+    description: "Comprehensive leaf removal and bed clearing for Spring and Fall readiness in Kent, Stow, and Aurora.",
+    icon: Leaf,
   },
   {
     id: "snow",
+    slug: "snow",
     title: "Snow Removal",
     description: "Reliable 24/7 driveway and sidewalk clearing for safe winter access in the Cleveland area.",
     icon: Snowflake,
@@ -134,9 +140,9 @@ export const TESTIMONIALS: Testimonial[] = [
 // Navigation Links
 export const NAV_LINKS = [
   { label: "Services", href: "/services" },
-  { label: "Service Areas", href: "#areas" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Service Areas", href: "/service-areas" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
 ] as const
 
 // Animation Variants for Framer Motion

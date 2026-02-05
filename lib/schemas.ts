@@ -41,3 +41,46 @@ export const serverQuoteSchema = quoteFormSchema.extend({
 })
 
 export type ServerQuoteData = z.infer<typeof serverQuoteSchema>
+
+// Contact Form Schema
+export const contactFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters"),
+  phone: z
+    .string()
+    .min(10, "Please enter a valid phone number")
+    .regex(/^[\d\s\-\(\)]+$/, "Please enter a valid phone number"),
+  email: z
+    .string()
+    .email("Please enter a valid email")
+    .optional()
+    .or(z.literal("")),
+  address: z
+    .string()
+    .max(200, "Address must be less than 200 characters")
+    .optional()
+    .or(z.literal("")),
+  service: z
+    .string()
+    .optional()
+    .or(z.literal("")),
+  city: z
+    .string()
+    .optional()
+    .or(z.literal("")),
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters")
+    .max(2000, "Message must be less than 2000 characters"),
+})
+
+export type ContactFormData = z.infer<typeof contactFormSchema>
+
+// Server-side contact validation
+export const serverContactSchema = contactFormSchema.extend({
+  honeypot: z.string().max(0, "Bot detected").optional(),
+})
+
+export type ServerContactData = z.infer<typeof serverContactSchema>

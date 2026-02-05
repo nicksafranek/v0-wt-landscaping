@@ -280,7 +280,7 @@ export default function ServicesPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <h3 className="text-center text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-                Specialty Mulching Service
+                Mulch & Seasonal Cleanups
               </h3>
               <div className="flex flex-wrap justify-center gap-3">
                 {SERVICE_AREAS.mulchOnly.map((city) => (

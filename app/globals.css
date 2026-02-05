@@ -32,6 +32,8 @@
   --charcoal: #1E293B;
   --slate-light: #94A3B8;
   --ice: #F8FAFC;
+  --forest: #166534;
+  --forest-glow: rgba(22, 101, 52, 0.1);
 
   /* Shadcn/ui chart variables - ADDED */
   --chart-1: oklch(0.646 0.222 41.116);
@@ -79,6 +81,8 @@
   --charcoal: #1E293B;
   --slate-light: #94A3B8;
   --ice: #0F172A;
+  --forest: #22C55E;
+  --forest-glow: rgba(34, 197, 94, 0.15);
 
   /* Shadcn/ui dark mode chart variables - ADDED */
   --chart-1: oklch(0.488 0.243 264.376);
@@ -131,6 +135,8 @@
   --color-charcoal: var(--charcoal);
   --color-slate-light: var(--slate-light);
   --color-ice: var(--ice);
+  --color-forest: var(--forest);
+  --color-forest-glow: var(--forest-glow);
 
   /* Shadcn/ui chart color tokens - ADDED */
   --color-chart-1: var(--chart-1);

@@ -19,7 +19,7 @@ export function CityBadge({ city, variant = "default" }: CityBadgeProps) {
     >
       {city}
       {variant === "mulch" && (
-        <span className="ml-1.5 text-xs text-muted-foreground">(Mulch)</span>
+        <span className="ml-1.5 text-xs text-muted-foreground">(Mulch & Cleanups)</span>
       )}
     </Link>
   )
