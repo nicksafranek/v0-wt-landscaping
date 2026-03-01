@@ -20,8 +20,8 @@ interface QuoteDrawerProps {
 export function QuoteDrawer({ open, onOpenChange }: QuoteDrawerProps) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="bottom" className="h-[90vh] overflow-y-auto rounded-t-2xl">
-        <SheetHeader className="text-left">
+      <SheetContent side="bottom" className="h-[90vh] overflow-y-auto rounded-t-2xl px-8">
+        <SheetHeader className="text-left px-0">
           <SheetTitle className="font-serif text-2xl tracking-wide">
             Get Your Free Quote
           </SheetTitle>
