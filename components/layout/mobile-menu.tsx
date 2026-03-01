@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Phone, MessageCircle } from "lucide-react"
 import {
@@ -11,6 +12,7 @@ import {
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { NAV_LINKS, BUSINESS_INFO } from "@/lib/constants"
+import { MobileServicesAccordion } from "./mobile-services-accordion"
 import { cn } from "@/lib/utils"
 
 interface MobileMenuProps {
@@ -33,12 +35,29 @@ export function MobileMenu({ open, onOpenChange, onOpenQuote }: MobileMenuProps)
       <SheetContent side="right" className="w-full max-w-sm bg-background">
         <SheetHeader className="text-left">
           <SheetTitle className="font-serif text-2xl tracking-wider text-foreground">
-            {BUSINESS_INFO.name}
+            <div className="relative w-[160px] h-[40px]">
+              <Image
+                src="/images/logo/logo-full2.svg"
+                alt="WT Property Maintenance Full Logo"
+                fill
+                className="object-contain object-left"
+                priority
+              />
+            </div>
           </SheetTitle>
         </SheetHeader>
 
         <nav className="mt-8 flex flex-col gap-1" aria-label="Mobile navigation">
           {NAV_LINKS.map((link) => {
+            if (link.label === "Services") {
+              return (
+                <MobileServicesAccordion
+                  key={link.href}
+                  onNavigate={() => onOpenChange(false)}
+                />
+              )
+            }
+
             const isActive = isActiveLink(link.href)
             return (
               <Link

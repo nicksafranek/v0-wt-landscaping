@@ -136,8 +136,8 @@ function MapController({ showFullServiceArea, showMulchServiceArea }: { showFull
         // Just fit bounds once on load, with a small padding to ensure the full highlight
         // shape is reliably visible even with narrower container aspects
         if (allCoords.length > 0) {
-            // Added 25px padding so the shapes aren't clipped on the edges
-            map.fitBounds(bounds, { padding: [25, 25], animate: false })
+            // Increased to 60px padding so the shapes aren't clipped on 13" laptop screens
+            map.fitBounds(bounds, { padding: [60, 60], animate: false })
         }
     }, [map]) // Removed other dependencies to prevent re-fitting on minor updates
 

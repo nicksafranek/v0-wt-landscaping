@@ -40,6 +40,7 @@ export async function submitQuoteRequest(
       phone: validated.data.phone,
       email: validated.data.email,
       service: validated.data.service,
+      address: validated.data.address,
       city: validated.data.city,
       message: validated.data.message,
       newsletter: validated.data.newsletter,

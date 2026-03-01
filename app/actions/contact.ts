@@ -1,6 +1,7 @@
 "use server"
 
 import { serverContactSchema, type ContactFormData } from "@/lib/schemas"
+import { supabase } from "@/lib/supabase"
 
 export type ContactSubmissionResult = {
   success: boolean
@@ -27,34 +28,44 @@ export async function submitContactForm(
       return { success: true }
     }
 
-    // TODO: Implement actual form submission logic here
-    // Options include:
-    // 1. Send email via Resend/SendGrid
-    // 2. Store in database (Supabase, Neon, etc.)
-    // 3. Send to CRM (HubSpot, Salesforce, etc.)
-    // 4. Trigger webhook
+    // Insert into Supabase
+    // Format services array into string
+    const selectedServices = validated.data.service.filter(s => s !== 'other')
+    let serviceString = selectedServices.map(id => {
+      // We need to import SERVICE_OPTIONS here or just capitalize/pass through
+      // Since we don't have easy access to SERVICE_OPTIONS in server action without importing constants
+      // Let's just pass the ID for now or title case it
+      return id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, ' ')
+    }).join(", ")
 
-    // Log for development (remove in production)
-    console.log("Contact Form Received:", {
-      name: validated.data.name,
-      phone: validated.data.phone,
-      email: validated.data.email,
-      address: validated.data.address,
-      service: validated.data.service,
-      city: validated.data.city,
-      message: validated.data.message,
-      timestamp: new Date().toISOString(),
-    })
+    if (validated.data.service.includes('other') && validated.data.otherService) {
+      serviceString += serviceString ? `, Other: ${validated.data.otherService}` : `Other: ${validated.data.otherService}`
+    }
 
-    // Simulate processing delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    const { error } = await supabase
+      .from("leads")
+      .insert({
+        name: validated.data.name,
+        phone: validated.data.phone,
+        email: validated.data.email,
+        address: validated.data.address,
+        service: serviceString,
+        city: validated.data.city,
+        message: validated.data.message,
+        // status will default to 'new'
+      })
+
+    if (error) {
+      console.error("Supabase error:", error)
+      throw error // Re-throw to be caught below
+    }
 
     return { success: true }
-  } catch (error) {
+  } catch (error: any) {
     console.error("Contact form submission error:", error)
     return {
       success: false,
-      error: "An unexpected error occurred. Please try again.",
+      error: error.message || JSON.stringify(error) || "An unexpected error occurred. Please try again.",
     }
   }
 }

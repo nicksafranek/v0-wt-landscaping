@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!service) {
     return {
-      title: "Service Not Found - WT Landscaping",
+      title: "Service Not Found - WT Property Maintenance",
     }
   }
 

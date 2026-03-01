@@ -3,32 +3,14 @@ import { ALL_CITIES, SERVICE_OPTIONS } from "./constants"
 
 // Quote Form Schema
 export const quoteFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, "Name must be at least 2 characters")
-    .max(100, "Name must be less than 100 characters"),
-  phone: z
-    .string()
-    .min(10, "Please enter a valid phone number")
-    .regex(/^[\d\s\-\(\)]+$/, "Please enter a valid phone number"),
-  email: z
-    .string()
-    .email("Please enter a valid email")
-    .optional()
-    .or(z.literal("")),
-  service: z.enum(
-    SERVICE_OPTIONS.map(s => s.value) as [string, ...string[]],
-    { errorMap: () => ({ message: "Please select a service" }) }
-  ),
-  city: z.enum(
-    ALL_CITIES as unknown as [string, ...string[]],
-    { errorMap: () => ({ message: "Please select your city" }) }
-  ),
-  message: z
-    .string()
-    .max(1000, "Message must be less than 1000 characters")
-    .optional()
-    .or(z.literal("")),
+  name: z.string().optional().or(z.literal("")),
+  phone: z.string().optional().or(z.literal("")),
+  email: z.string().email().optional().or(z.literal("")),
+  service: z.array(z.string()).optional().default([]),
+  otherService: z.string().optional().or(z.literal("")),
+  address: z.string().optional().or(z.literal("")),
+  city: z.string().optional().or(z.literal("")),
+  message: z.string().optional().or(z.literal("")),
   newsletter: z.boolean().default(false),
 })
 
@@ -63,9 +45,13 @@ export const contactFormSchema = z.object({
     .optional()
     .or(z.literal("")),
   service: z
-    .string()
+    .array(z.string())
     .optional()
-    .or(z.literal("")),
+    .default([]),
+  otherService: z
+    .string()
+    .max(100, "Service description must be less than 100 characters")
+    .optional(),
   city: z
     .string()
     .optional()

@@ -12,68 +12,37 @@ import { Footer } from "@/components/layout/footer"
 import { QuoteModal } from "@/components/ui/quote-modal"
 import { QuoteDrawer } from "@/components/ui/quote-drawer"
 import { Button } from "@/components/ui/button"
+import { PulseIndicator } from "@/components/ui/pulse-indicator"
 import { SERVICE_AREAS, cityToSlug, BUSINESS_INFO } from "@/lib/constants"
 import { getServiceBySlug, getRelatedServices, type ServiceExtended } from "@/lib/services-data"
-import { 
-  ChevronRight, 
-  Phone, 
-  Check, 
-  ArrowRight,
-  Calendar
+import {
+  ChevronRight,
+  Phone,
+  Check,
+  ArrowRight
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Sticky CTA Button Component
-function StickyCTA({ onClick }: { onClick: () => void }) {
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Show after scrolling past hero (roughly 400px)
-      setIsVisible(window.scrollY > 400)
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: isVisible ? 0 : 100, opacity: isVisible ? 1 : 0 }}
-      className="fixed bottom-6 right-6 z-40"
-    >
-      <Button
-        onClick={onClick}
-        size="lg"
-        className="bg-orange text-white hover:bg-orange-hover shadow-lg rounded-full px-6 py-6 flex items-center gap-2"
-      >
-        <Calendar className="w-5 h-5" />
-        <span className="hidden sm:inline">Get Free Quote</span>
-      </Button>
-    </motion.div>
-  )
-}
 
 // Breadcrumbs Component
 function Breadcrumbs({ serviceName }: { serviceName: string }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
-      <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+      <ol className="flex items-center gap-2 text-sm text-slate-300">
         <li>
-          <Link href="/" className="hover:text-foreground transition-colors">
+          <Link href="/" className="hover:text-white transition-colors">
             Home
           </Link>
         </li>
         <ChevronRight className="w-4 h-4" aria-hidden="true" />
         <li>
-          <Link href="/services" className="hover:text-foreground transition-colors">
+          <Link href="/services" className="hover:text-white transition-colors">
             Services
           </Link>
         </li>
         <ChevronRight className="w-4 h-4" aria-hidden="true" />
         <li>
-          <span className="text-foreground font-medium" aria-current="page">
+          <span className="text-slate-200 font-medium" aria-current="page">
             {serviceName}
           </span>
         </li>
@@ -85,12 +54,12 @@ function Breadcrumbs({ serviceName }: { serviceName: string }) {
 // Process Timeline Component
 function ProcessTimeline({ steps }: { steps: ServiceExtended["processSteps"] }) {
   const prefersReducedMotion = useReducedMotion()
-  
+
   return (
     <div className="relative">
       {/* Timeline line */}
       <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-border" aria-hidden="true" />
-      
+
       <div className="space-y-8">
         {steps.map((step, index) => (
           <motion.div
@@ -105,7 +74,7 @@ function ProcessTimeline({ steps }: { steps: ServiceExtended["processSteps"] }) 
             <div className="relative z-10 w-12 h-12 rounded-full bg-orange text-white flex items-center justify-center font-serif text-xl shrink-0">
               {step.step}
             </div>
-            
+
             {/* Content */}
             <div className="pt-2">
               <h4 className="font-semibold text-foreground text-lg mb-1">{step.title}</h4>
@@ -121,7 +90,7 @@ function ProcessTimeline({ steps }: { steps: ServiceExtended["processSteps"] }) 
 // Related Services Component
 function RelatedServices({ services, currentSlug }: { services: ServiceExtended[], currentSlug: string }) {
   const prefersReducedMotion = useReducedMotion()
-  
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {services.map((service, index) => (
@@ -135,15 +104,17 @@ function RelatedServices({ services, currentSlug }: { services: ServiceExtended[
           <Link
             href={`/services/${service.slug}`}
             className={cn(
-              "block p-4 rounded-lg border border-border bg-card hover:border-orange/50 hover:shadow-md transition-all group",
-              service.slug === currentSlug && "border-orange bg-orange/5"
+              "block p-6 rounded-lg border bg-neutral-700 hover:bg-neutral-600 transaction-all group h-full flex flex-col",
+              service.slug === currentSlug
+                ? "border-orange ring-1 ring-orange"
+                : "border-neutral-600 hover:border-orange/50"
             )}
           >
-            <div className="w-10 h-10 rounded-lg bg-orange/10 flex items-center justify-center mb-3 group-hover:bg-orange/20 transition-colors">
-              <service.icon className="w-5 h-5 text-orange" aria-hidden="true" />
+            <div className="w-12 h-12 rounded-lg bg-neutral-800/50 flex items-center justify-center mb-4 group-hover:bg-orange/10 transition-colors shrink-0">
+              <service.icon className="w-6 h-6 text-orange" aria-hidden="true" />
             </div>
-            <h4 className="font-semibold text-foreground mb-1">{service.shortTitle}</h4>
-            <p className="text-sm text-muted-foreground line-clamp-2">{service.description}</p>
+            <h4 className="font-semibold text-lg text-white mb-2 group-hover:text-orange transition-colors">{service.shortTitle}</h4>
+            <p className="text-sm text-neutral-300 leading-relaxed flex-grow">{service.description}</p>
           </Link>
         </motion.div>
       ))}
@@ -155,7 +126,7 @@ export default function ServicePage() {
   const params = useParams()
   const slug = params.slug as string
   const service = getServiceBySlug(slug)
-  
+
   const [quoteOpen, setQuoteOpen] = useState(false)
   const isMobile = useIsMobile()
   const prefersReducedMotion = useReducedMotion()
@@ -171,7 +142,7 @@ export default function ServicePage() {
   return (
     <>
       <Header onOpenQuote={handleOpenQuote} />
-      
+
       <main className="pt-[72px]">
         {/* Hero Section */}
         <section className="relative">
@@ -186,11 +157,14 @@ export default function ServicePage() {
             />
             <div className="absolute inset-0 bg-black/60" />
           </div>
-          
-          <div className="relative z-10 py-16 md:py-24 lg:py-32">
-            <div className="max-w-7xl mx-auto px-6">
+
+          <div className={cn(
+            "relative z-10",
+            slug === 'snow' ? "py-12 md:py-16 lg:py-24" : "py-16 md:py-24 lg:py-32"
+          )}>
+            <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-6">
               <Breadcrumbs serviceName={service.shortTitle} />
-              
+
               <motion.div
                 initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -201,12 +175,12 @@ export default function ServicePage() {
                   {service.heroTagline}
                 </span>
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white tracking-wide mb-6 text-balance">
-                  Professional {service.shortTitle} in North Royalton & Cleveland Suburbs
+                  {service.heroTitle || `Professional ${service.shortTitle} in North Royalton & Cleveland Suburbs`}
                 </h1>
                 <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-8">
                   {service.valueProposition}
                 </p>
-                <div className="flex flex-col sm:flex-row items-start gap-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   <Button
                     onClick={handleOpenQuote}
                     size="lg"
@@ -228,8 +202,11 @@ export default function ServicePage() {
         </section>
 
         {/* Main Content Area - Two Column Layout */}
-        <section className="py-16 md:py-24 bg-background">
-          <div className="max-w-7xl mx-auto px-6">
+        <section className={cn(
+          "bg-background pb-16 md:pb-24",
+          (service.slug === "mulch-installation" || service.slug === "lawn-mowing" || service.slug === "seasonal-cleanups") ? "pt-8 md:pt-12" : "py-16 md:py-24"
+        )}>
+          <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Main Content - 2/3 width */}
               <div className="lg:col-span-2 space-y-12">
@@ -239,16 +216,18 @@ export default function ServicePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                 >
+                  {(service.slug === "mulch-installation" || service.slug === "lawn-mowing" || service.slug === "seasonal-cleanups") && (
+                    <div className="mb-4">
+                      <PulseIndicator size="large" />
+                    </div>
+                  )}
                   <h2 className="font-serif text-3xl md:text-4xl text-foreground tracking-wide mb-6">
-                    Why Choose WT Landscaping for {service.shortTitle}?
+                    Why Choose WT Property Maintenance for {service.shortTitle}?
                   </h2>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                     {service.introContent}
                   </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Whether {"you're"} a homeowner in Strongsville looking for reliable weekly service or a property manager 
-                    in Parma needing a dependable partner, WT Landscaping delivers the quality and consistency your property deserves.
-                  </p>
+
                 </motion.div>
 
                 {/* Features Grid */}
@@ -314,8 +293,8 @@ export default function ServicePage() {
                   </h3>
                   <div className="space-y-4">
                     {service.faqs.map((faq, index) => (
-                      <details 
-                        key={index} 
+                      <details
+                        key={index}
                         className="group p-4 rounded-lg border border-border bg-card"
                       >
                         <summary className="font-semibold text-foreground cursor-pointer list-none flex items-center justify-between">
@@ -382,110 +361,15 @@ export default function ServicePage() {
                       ))}
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Serving Your Neighborhood Section */}
-        <section className="py-16 md:py-20 bg-ice dark:bg-charcoal/50">
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-10"
-            >
-              <h2 className="font-serif text-3xl md:text-4xl text-foreground tracking-wide mb-4">
-                Serving Your Neighborhood
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                We provide professional {service.shortTitle.toLowerCase()} services throughout the Greater Cleveland 
-                and Northeast Ohio area. Find your city below.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto"
-            >
-              {allCities.map((city) => (
-                <Link
-                  key={city}
-                  href={`/services/${cityToSlug(city)}`}
-                  className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-background border border-border text-foreground hover:border-orange hover:text-orange transition-colors"
-                >
-                  {city}
-                </Link>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Bottom Related Services Grid */}
-        <section className="py-16 md:py-20 bg-background">
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-10"
-            >
-              <h2 className="font-serif text-3xl md:text-4xl text-foreground tracking-wide mb-4">
-                Explore Our Other Services
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                WT Landscaping offers a full range of property maintenance services to keep your home looking its best year-round.
-              </p>
-            </motion.div>
-
-            <RelatedServices services={relatedServices} currentSlug={slug} />
-          </div>
-        </section>
-
-        {/* CTA Footer Section */}
-        <section className="py-16 md:py-20 bg-orange">
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white tracking-wide mb-6">
-                Ready for Professional {service.shortTitle}?
-              </h2>
-              <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-                Get expert service and a free estimate. We respond within 24 hours.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button
-                  onClick={handleOpenQuote}
-                  size="lg"
-                  className="bg-white text-orange hover:bg-ice transition-colors font-semibold px-8 py-6 text-lg"
-                >
-                  Schedule Your Free Quote
-                </Button>
-                <Link
-                  href={`tel:${BUSINESS_INFO.phone}`}
-                  className="flex items-center gap-2 text-white hover:text-white/80 transition-colors font-medium"
-                >
-                  <Phone className="w-5 h-5" />
-                  <span>Or Call {BUSINESS_INFO.phoneFormatted}</span>
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </section>
       </main>
 
       <Footer />
-
-      {/* Sticky CTA */}
-      <StickyCTA onClick={handleOpenQuote} />
 
       {/* Quote Form - Modal on Desktop, Drawer on Mobile */}
       {isMobile ? (

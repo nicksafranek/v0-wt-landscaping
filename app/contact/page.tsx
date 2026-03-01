@@ -7,8 +7,11 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
+import { QuoteModal } from "@/components/ui/quote-modal"
 import { Button } from "@/components/ui/button"
+import { AnimatedButton } from "@/components/ui/animated-button"
 import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import {
@@ -21,13 +24,12 @@ import {
 import { BUSINESS_INFO, ALL_CITIES, SERVICE_OPTIONS } from "@/lib/constants"
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas"
 import { submitContactForm } from "@/app/actions/contact"
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock, 
-  Facebook, 
-  Instagram,
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Facebook,
   Loader2,
   CheckCircle,
   MessageCircle
@@ -38,11 +40,13 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false)
 
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
     reset,
   } = useForm<ContactFormData>({
@@ -55,7 +59,7 @@ export default function ContactPage() {
 
     try {
       const result = await submitContactForm(data)
-      
+
       if (result.success) {
         setIsSuccess(true)
         reset()
@@ -70,411 +74,345 @@ export default function ContactPage() {
   }
 
   // Dummy function for header prop
-  const handleOpenQuote = () => {}
+  const handleOpenQuote = () => setIsQuoteOpen(true)
 
   return (
     <>
       <Header onOpenQuote={handleOpenQuote} />
-      
+
       <main>
         {/* Hero Section */}
-        <section className="relative pt-[72px]">
-          <div className="bg-ice dark:bg-charcoal/50 py-16 md:py-24">
-            <div className="max-w-7xl mx-auto px-6">
-              <motion.div
-                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="max-w-3xl mx-auto text-center"
-              >
-                <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-orange bg-orange/10 rounded-full">
-                  Get In Touch
-                </span>
-                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground tracking-wide mb-6 text-balance">
-                  Contact Us
-                </h1>
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  Ready to transform your property? Reach out for a free quote or any questions 
-                  about our landscaping and property maintenance services.
-                </p>
-              </motion.div>
-            </div>
+        <section
+          className="relative min-h-[60svh] w-full overflow-hidden flex items-center justify-center pt-20"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 15% 50%, rgba(255, 107, 0, 0.08) 0%, transparent 25%),
+              radial-gradient(circle at 85% 30%, rgba(255, 107, 0, 0.05) 0%, transparent 20%)
+            `
+          }}
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
+          <div className="relative max-w-7xl 2xl:max-w-[1600px] mx-auto px-6 py-16 md:py-24">
+            <motion.div
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-orange bg-orange/10 rounded-full border border-orange/20">
+                Get In Touch
+              </span>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground tracking-wide mb-6 text-balance">
+                Contact Us
+              </h1>
+              <p className="text-lg md:text-xl text-neutral-600 leading-relaxed">
+                Ready to transform your property? Reach out for a free quote or any questions
+                about our landscaping and property maintenance services.
+              </p>
+            </motion.div>
           </div>
         </section>
 
-        {/* Contact Content */}
+        {/* Contact Content - Minimalistic Split Layout */}
         <section className="py-16 md:py-24 bg-background">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-              
-              {/* Contact Information */}
+          <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+              {/* Left Column: Contact Info (Clean & Minimal) */}
               <motion.div
                 initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
+                className="space-y-10"
               >
-                <h2 className="font-serif text-3xl text-foreground tracking-wide mb-8">
-                  Contact Information
-                </h2>
-
-                <div className="space-y-6 mb-10">
-                  {/* Phone */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-orange/10 flex items-center justify-center shrink-0">
-                      <Phone className="w-5 h-5 text-orange" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-1">Phone</h3>
-                      <Link 
-                        href={`tel:${BUSINESS_INFO.phone}`}
-                        className="text-muted-foreground hover:text-orange transition-colors"
-                      >
-                        {BUSINESS_INFO.phoneFormatted}
-                      </Link>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Call or text anytime
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Email */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-orange/10 flex items-center justify-center shrink-0">
-                      <Mail className="w-5 h-5 text-orange" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                      <Link 
-                        href={`mailto:${BUSINESS_INFO.email}`}
-                        className="text-muted-foreground hover:text-orange transition-colors"
-                      >
-                        {BUSINESS_INFO.email}
-                      </Link>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        We respond within 24 hours
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Location */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-orange/10 flex items-center justify-center shrink-0">
-                      <MapPin className="w-5 h-5 text-orange" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-1">Location</h3>
-                      <p className="text-muted-foreground">
-                        {BUSINESS_INFO.address.city}, {BUSINESS_INFO.address.state} {BUSINESS_INFO.address.zip}
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Serving Cleveland suburbs and Northeast Ohio
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Hours */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-orange/10 flex items-center justify-center shrink-0">
-                      <Clock className="w-5 h-5 text-orange" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-1">Business Hours</h3>
-                      <p className="text-muted-foreground">
-                        Monday - Saturday: 7:00 AM - 7:00 PM
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Emergency snow removal available 24/7
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Quick Contact Buttons */}
-                <div className="flex flex-wrap gap-3 mb-10">
-                  <Link
-                    href={`tel:${BUSINESS_INFO.phone}`}
-                    className="flex items-center gap-2 px-5 py-3 bg-orange text-white rounded-lg font-medium hover:bg-orange-hover transition-colors"
-                  >
-                    <Phone className="w-5 h-5" />
-                    Call Now
-                  </Link>
-                  <Link
-                    href={`sms:${BUSINESS_INFO.phone}`}
-                    className="flex items-center gap-2 px-5 py-3 bg-muted text-foreground rounded-lg font-medium hover:bg-muted/80 transition-colors"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    Text Us
-                  </Link>
-                </div>
-
-                {/* Social Links */}
                 <div>
-                  <h3 className="font-semibold text-foreground mb-4">Follow Us</h3>
-                  <div className="flex items-center gap-3">
+                  <h2 className="font-serif text-3xl md:text-4xl text-foreground tracking-wide mb-4">
+                    Get in Touch
+                  </h2>
+                  <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
+                    We're here to help with all your property maintenance needs.
+                    Reach out directly or send us a message.
+                  </p>
+                </div>
+
+                <div className="space-y-8">
+                  {[
+                    {
+                      icon: Phone,
+                      title: "Phone",
+                      content: BUSINESS_INFO.phoneFormatted,
+                      link: `tel:${BUSINESS_INFO.phone}`,
+                      action: "Call Now"
+                    },
+                    {
+                      icon: Mail,
+                      title: "Email",
+                      content: BUSINESS_INFO.email,
+                      link: `mailto:${BUSINESS_INFO.email}`,
+                      action: "Email Us"
+                    },
+                    {
+                      icon: MapPin,
+                      title: "Location",
+                      content: `${BUSINESS_INFO.address.city}, ${BUSINESS_INFO.address.state}`,
+                      link: "/service-areas",
+                      action: "View Service Area"
+                    },
+                    {
+                      icon: Clock,
+                      title: "Hours",
+                      content: BUSINESS_INFO.hours,
+                      link: null,
+                      action: "Open Today"
+                    }
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start gap-4 group"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center shrink-0 mt-1 transition-colors group-hover:bg-orange group-hover:text-white">
+                        <item.icon className="w-5 h-5 text-orange group-hover:text-white transition-colors" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-foreground text-lg mb-1">{item.title}</h3>
+                        <p className="text-muted-foreground mb-2">{item.content}</p>
+                        {item.link && (
+                          <Link
+                            href={item.link}
+                            className="text-sm font-medium text-orange hover:text-orange-hover hover:underline underline-offset-4"
+                          >
+                            {item.action}
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Social Links - Clean */}
+                <div className="pt-4 border-t border-border">
+                  <h3 className="font-medium text-foreground mb-4">Follow Us</h3>
+                  <div className="flex gap-4">
                     <Link
                       href={BUSINESS_INFO.social.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center hover:bg-orange hover:text-white transition-colors text-foreground"
-                      aria-label="Follow us on Facebook"
+                      className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-orange hover:text-white transition-all"
+                      aria-label="Facebook"
                     >
                       <Facebook className="w-5 h-5" />
-                    </Link>
-                    <Link
-                      href={BUSINESS_INFO.social.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center hover:bg-orange hover:text-white transition-colors text-foreground"
-                      aria-label="Follow us on Instagram"
-                    >
-                      <Instagram className="w-5 h-5" />
                     </Link>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Contact Form */}
+              {/* Right Column: Contact Form (Full Border Animation) */}
               <motion.div
                 initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="relative"
               >
-                <div className="bg-card border border-border rounded-xl p-8">
-                  <h2 className="font-serif text-2xl text-foreground tracking-wide mb-2">
-                    Send Us a Message
-                  </h2>
-                  <p className="text-muted-foreground mb-6">
-                    Fill out the form below and we will get back to you within 24 hours.
-                  </p>
+                {/* Moving Border Gradient Wrapper */}
+                <div className="relative rounded-2xl overflow-hidden p-[1px] shadow-sm">
+                  <div className="absolute inset-0 bg-border/30" /> {/* Base border color */}
+                  <motion.div
+                    className="absolute inset-[-100%]"
+                    style={{
+                      background: "conic-gradient(from 0deg, transparent 0, rgba(249, 115, 22, 0.4) 15%, transparent 30%)",
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
 
-                  {isSuccess ? (
-                    <div className="text-center py-12">
-                      <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                      <h3 className="font-serif text-2xl text-foreground mb-2">Message Sent!</h3>
-                      <p className="text-muted-foreground mb-6">
-                        Thank you for reaching out. We will contact you within 24 hours.
+                  {/* Content Container */}
+                  <div className="relative bg-card rounded-2xl p-6 md:p-10 h-full">
+                    <div className="mb-8">
+                      <h2 className="font-serif text-2xl md:text-3xl text-foreground tracking-wide mb-2">
+                        Send Us a Message
+                      </h2>
+                      <p className="text-muted-foreground text-sm md:text-base">
+                        Fill out the form below and we'll get back to you within 24 hours.
                       </p>
-                      <Button
-                        onClick={() => setIsSuccess(false)}
-                        variant="outline"
-                      >
-                        Send Another Message
-                      </Button>
                     </div>
-                  ) : (
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                      {serverError && (
-                        <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
-                          {serverError}
+
+                    {isSuccess ? (
+                      <div className="text-center py-12">
+                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <CheckCircle className="w-8 h-8 text-green-600" />
                         </div>
-                      )}
+                        <h3 className="font-serif text-2xl text-foreground mb-2">Message Sent!</h3>
+                        <p className="text-muted-foreground mb-6">
+                          Thank you for reaching out. We will contact you shortly.
+                        </p>
+                        <Button
+                          onClick={() => setIsSuccess(false)}
+                          variant="outline"
+                          className="w-full"
+                        >
+                          Send Another Message
+                        </Button>
+                      </div>
+                    ) : (
+                      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                        {serverError && (
+                          <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm text-center">
+                            {serverError}
+                          </div>
+                        )}
 
-                      {/* Honeypot field for bot protection */}
-                      <input
-                        type="text"
-                        {...register("honeypot" as keyof ContactFormData)}
-                        className="sr-only"
-                        tabIndex={-1}
-                        autoComplete="off"
-                        aria-hidden="true"
-                      />
-
-                      {/* Name */}
-                      <div className="space-y-2">
-                        <Label htmlFor="name">
-                          Name <span className="text-destructive">*</span>
-                        </Label>
-                        <Input
-                          id="name"
+                        {/* Honeypot field for bot protection */}
+                        <input
                           type="text"
-                          placeholder="Your full name"
-                          {...register("name")}
-                          aria-invalid={!!errors.name}
-                          aria-describedby={errors.name ? "name-error" : undefined}
+                          {...register("honeypot" as keyof ContactFormData)}
+                          className="sr-only"
+                          tabIndex={-1}
+                          autoComplete="off"
+                          aria-hidden="true"
                         />
-                        {errors.name && (
-                          <p id="name-error" className="text-sm text-destructive">
-                            {errors.name.message}
-                          </p>
-                        )}
-                      </div>
 
-                      {/* Phone */}
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">
-                          Phone <span className="text-destructive">*</span>
-                        </Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="(440) 555-0123"
-                          {...register("phone")}
-                          aria-invalid={!!errors.phone}
-                          aria-describedby={errors.phone ? "phone-error" : undefined}
-                        />
-                        {errors.phone && (
-                          <p id="phone-error" className="text-sm text-destructive">
-                            {errors.phone.message}
-                          </p>
-                        )}
-                      </div>
+                        <div className="space-y-5">
+                          {/* Name */}
+                          <div className="space-y-2">
+                            <Label htmlFor="name">
+                              Name <span className="text-destructive">*</span>
+                            </Label>
+                            <Input
+                              id="name"
+                              type="text"
+                              placeholder="Your full name"
+                              {...register("name")}
+                              className="h-12 bg-muted/30 border-input focus-visible:ring-orange focus-visible:border-orange"
+                              aria-invalid={!!errors.name}
+                              aria-describedby={errors.name ? "name-error" : undefined}
+                            />
+                            {errors.name && (
+                              <p id="name-error" className="text-sm text-destructive">
+                                {errors.name.message}
+                              </p>
+                            )}
+                          </div>
 
-                      {/* Email */}
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email (Optional)</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="your@email.com"
-                          {...register("email")}
-                          aria-invalid={!!errors.email}
-                          aria-describedby={errors.email ? "email-error" : undefined}
-                        />
-                        {errors.email && (
-                          <p id="email-error" className="text-sm text-destructive">
-                            {errors.email.message}
-                          </p>
-                        )}
-                      </div>
+                          {/* Phone */}
+                          <div className="space-y-2">
+                            <Label htmlFor="phone">
+                              Phone <span className="text-destructive">*</span>
+                            </Label>
+                            <Input
+                              id="phone"
+                              type="tel"
+                              placeholder="(440) 555-0123"
+                              {...register("phone")}
+                              className="h-12 bg-muted/30 border-input focus-visible:ring-orange focus-visible:border-orange"
+                              aria-invalid={!!errors.phone}
+                              aria-describedby={errors.phone ? "phone-error" : undefined}
+                            />
+                            {errors.phone && (
+                              <p id="phone-error" className="text-sm text-destructive">
+                                {errors.phone.message}
+                              </p>
+                            )}
+                          </div>
 
-                      {/* Address */}
-                      <div className="space-y-2">
-                        <Label htmlFor="address">Property Address (Optional)</Label>
-                        <Input
-                          id="address"
-                          type="text"
-                          placeholder="123 Main St, City, OH"
-                          {...register("address")}
-                          aria-describedby={errors.address ? "address-error" : undefined}
-                        />
-                        {errors.address && (
-                          <p id="address-error" className="text-sm text-destructive">
-                            {errors.address.message}
-                          </p>
-                        )}
-                      </div>
+                          {/* Email */}
+                          <div className="space-y-2">
+                            <Label htmlFor="email">Email (Optional)</Label>
+                            <Input
+                              id="email"
+                              type="email"
+                              placeholder="your@email.com"
+                              {...register("email")}
+                              className="h-12 bg-muted/30 border-input focus-visible:ring-orange focus-visible:border-orange"
+                              aria-invalid={!!errors.email}
+                              aria-describedby={errors.email ? "email-error" : undefined}
+                            />
+                            {errors.email && (
+                              <p id="email-error" className="text-sm text-destructive">
+                                {errors.email.message}
+                              </p>
+                            )}
+                          </div>
 
-                      {/* Service Selection */}
-                      <div className="space-y-2">
-                        <Label htmlFor="service">Service Interested In</Label>
-                        <Select onValueChange={(value) => setValue("service", value)}>
-                          <SelectTrigger id="service">
-                            <SelectValue placeholder="Select a service (optional)" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {SERVICE_OPTIONS.map((option) => (
-                              <SelectItem key={option.value} value={option.value}>
-                                {option.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
+                          {/* City */}
+                          <div className="space-y-2">
+                            <Label htmlFor="city">Your City</Label>
+                            <Input
+                              id="city"
+                              type="text"
+                              placeholder="Your city"
+                              {...register("city")}
+                              className="h-12 bg-muted/30 border-input focus-visible:ring-orange focus-visible:border-orange"
+                              aria-invalid={!!errors.city}
+                              aria-describedby={errors.city ? "city-error" : undefined}
+                            />
+                            {errors.city && (
+                              <p id="city-error" className="text-sm text-destructive">
+                                {errors.city.message}
+                              </p>
+                            )}
+                          </div>
+                        </div>
 
-                      {/* City Selection */}
-                      <div className="space-y-2">
-                        <Label htmlFor="city">Your City</Label>
-                        <Select onValueChange={(value) => setValue("city", value)}>
-                          <SelectTrigger id="city">
-                            <SelectValue placeholder="Select your city (optional)" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {ALL_CITIES.map((city) => (
-                              <SelectItem key={city} value={city}>
-                                {city}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
+                        {/* Message */}
+                        <div className="space-y-2">
+                          <Label htmlFor="message">
+                            Message <span className="text-destructive">*</span>
+                          </Label>
+                          <Textarea
+                            id="message"
+                            placeholder="Tell us about your project or ask a question..."
+                            rows={5}
+                            {...register("message")}
+                            className="min-h-[150px] bg-muted/30 border-input focus-visible:ring-orange focus-visible:border-orange resize-none"
+                            aria-invalid={!!errors.message}
+                            aria-describedby={errors.message ? "message-error" : undefined}
+                          />
+                          {errors.message && (
+                            <p id="message-error" className="text-sm text-destructive">
+                              {errors.message.message}
+                            </p>
+                          )}
+                        </div>
 
-                      {/* Message */}
-                      <div className="space-y-2">
-                        <Label htmlFor="message">
-                          Message <span className="text-destructive">*</span>
-                        </Label>
-                        <Textarea
-                          id="message"
-                          placeholder="Tell us about your project or ask a question..."
-                          rows={4}
-                          {...register("message")}
-                          aria-invalid={!!errors.message}
-                          aria-describedby={errors.message ? "message-error" : undefined}
-                        />
-                        {errors.message && (
-                          <p id="message-error" className="text-sm text-destructive">
-                            {errors.message.message}
-                          </p>
-                        )}
-                      </div>
-
-                      {/* Submit Button */}
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full h-12 bg-orange text-white hover:bg-orange-hover transition-colors font-medium"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                            Sending...
-                          </>
-                        ) : (
-                          "Send Message"
-                        )}
-                      </Button>
-                    </form>
-                  )}
+                        {/* Submit Button - Standard with Design Fit */}
+                        <Button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-full h-14 bg-orange text-white hover:bg-orange/90 transition-colors font-medium text-lg mt-4 shadow-sm"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                              Sending...
+                            </>
+                          ) : (
+                            "Send Message"
+                          )}
+                        </Button>
+                      </form>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             </div>
-          </div>
-        </section>
-
-        {/* Map Section */}
-        <section className="py-16 md:py-20 bg-ice dark:bg-charcoal/50">
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-10"
-            >
-              <h2 className="font-serif text-3xl md:text-4xl text-foreground tracking-wide mb-4">
-                Our Service Area
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                We serve homeowners throughout the Cleveland suburbs and Northeast Ohio, 
-                with specialty mulch services extending to Kent, Stow, and Aurora.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="rounded-xl overflow-hidden border border-border"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d190000!2d-81.55!3d41.35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8830e5b0c4b4d3c7%3A0x8e5f7c7d7a7c7d7a!2sNorth%20Royalton%2C%20OH!5e0!3m2!1sen!2sus!4v1"
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="WT Landscaping service area map"
-              />
-            </motion.div>
-          </div>
-        </section>
-      </main>
+          </div >
+        </section >
+      </main >
 
       <Footer />
+
+      {/* Quote Form - Modal on Desktop, Drawer on Mobile */}
+      <QuoteModal
+        open={isQuoteOpen}
+        onOpenChange={setIsQuoteOpen}
+      />
     </>
   )
 }

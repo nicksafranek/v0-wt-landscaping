@@ -1,16 +1,18 @@
 import React from "react"
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Bebas_Neue } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { Toaster } from 'sonner'
+import { MobileCTA } from '@/components/layout/mobile-cta'
 import './globals.css'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: '--font-inter',
   display: 'swap',
 });
 
-const bebasNeue = Bebas_Neue({ 
+const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ["latin"],
   variable: '--font-bebas',
@@ -18,36 +20,30 @@ const bebasNeue = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: 'BEST Landscaping & Snow Removal Cleveland Suburbs - WT Landscaping - Professional Lawn Mowing, Edging, Mulch & Cleanup Near Me',
-  description: 'WT Landscaping offers elite, year-round property care in Strongsville, Parma, & North Royalton. Get expert lawn mowing, mulch installation, & 24/7 snow removal. Schedule your free quote today!',
+  title: "BEST Landscaping Cleveland - WT Property Maintenance Provides Expert Lawn Care, Mowing, Mulching, Fall And Spring Cleanups, Hedge Trimming, & Snow Removal Near Me. Call Today for a Free Estimate",
+  description: "Transform your home’s curb appeal with WT Property Maintenance. From picture-perfect mulch beds to reliable snow removal, we provide elite, year-round care in Cleveland. Get your free estimate today!",
   robots: 'index, follow',
   alternates: {
     canonical: 'https://wtlandscaping.com',
   },
   openGraph: {
-    title: 'BEST Landscaping & Snow Removal Cleveland Suburbs - WT Landscaping',
-    description: 'Elite year-round property care in Cleveland suburbs. Expert lawn mowing, mulch installation, & 24/7 snow removal.',
+    title: "BEST Landscaping Cleveland - WT Property Maintenance Provides Expert Lawn Care, Mowing, Mulching, Fall And Spring Cleanups, Hedge Trimming, & Snow Removal Near Me. Call Today for a Free Estimate",
+    description: "Experience the excitement of a perfectly maintained yard. Elite landscaping and year-round property care for North Royalton and the Cleveland suburbs.",
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
     type: 'website',
   },
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
+        url: '/images/logo/logo-small.svg',
         type: 'image/svg+xml',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: [
+      { url: '/images/logo/logo-small.svg' },
+    ],
   },
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -64,21 +60,35 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "name": "WT Landscaping",
+              "name": "WT Property Maintenance",
               "description": "Professional landscaping and snow removal services in Cleveland suburbs",
               "telephone": "440-429-7313",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "[Street Address]",
-                "addressLocality": "Kent",
+                "addressLocality": "North Royalton",
                 "addressRegion": "OH",
-                "postalCode": "44240"
+                "postalCode": "44133"
               },
               "areaServed": [
                 "North Royalton", "Parma", "Garfield Heights", "Maple Heights",
                 "Strongsville", "Brecksville", "Broadview Heights", "Brooklyn",
                 "Old Brooklyn", "Middleburg Heights", "Kent", "Stow", "Aurora"
               ],
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "00:00",
+                "closes": "23:59"
+              },
               "serviceType": ["Lawn Mowing", "Mulch Installation", "Hedge Trimming", "Seasonal Cleanups", "Snow Removal"]
             })
           }}
@@ -97,8 +107,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${bebasNeue.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${bebasNeue.variable} font-sans antialiased pb-20 md:pb-0 [scrollbar-gutter:stable]`}>
         {children}
+        <Toaster />
+        <MobileCTA />
         <Analytics />
       </body>
     </html>

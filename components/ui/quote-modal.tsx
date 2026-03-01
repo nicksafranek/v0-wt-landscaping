@@ -20,7 +20,7 @@ interface QuoteModalProps {
 export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="font-serif text-2xl tracking-wide">
             Get Your Free Quote

@@ -1,26 +1,29 @@
 "use client"
 
-import Link from "next/link"
-import { cityToSlug } from "@/lib/constants"
+import { cn } from "@/lib/utils"
 
 interface CityBadgeProps {
   city: string
   variant?: "default" | "mulch"
+  className?: string
+  onMouseEnter?: () => void
+  onMouseLeave?: () => void
 }
 
-export function CityBadge({ city, variant = "default" }: CityBadgeProps) {
-  const slug = cityToSlug(city)
-  const href = `/services/${slug}`
-
+export function CityBadge({ city, variant = "default", className, onMouseEnter, onMouseLeave }: CityBadgeProps) {
   return (
-    <Link
-      href={href}
-      className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-background border border-border text-foreground hover:border-orange hover:text-orange transition-colors"
+    <span
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className={cn(
+        "inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-background border border-border text-foreground transition-colors",
+        variant === "default"
+          ? "hover:border-orange hover:text-orange"
+          : "hover:border-green-600 hover:text-green-600",
+        className
+      )}
     >
       {city}
-      {variant === "mulch" && (
-        <span className="ml-1.5 text-xs text-muted-foreground">(Mulch & Cleanups)</span>
-      )}
-    </Link>
+    </span>
   )
 }

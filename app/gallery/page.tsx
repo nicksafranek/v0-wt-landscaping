@@ -10,64 +10,77 @@ import { Footer } from "@/components/layout/footer"
 import { QuoteModal } from "@/components/ui/quote-modal"
 import { QuoteDrawer } from "@/components/ui/quote-drawer"
 import { Button } from "@/components/ui/button"
+import { AnimatedButton } from "@/components/ui/animated-button"
 import { BUSINESS_INFO } from "@/lib/constants"
-import { Phone, Camera, Leaf, Scissors, Snowflake, Sparkles, TreeDeciduous } from "lucide-react"
+import { Phone, Camera } from "lucide-react"
+import { GiFarmTractor, GiWheelbarrow, GiShears, GiRake } from "react-icons/gi"
+import { BsSnow } from "react-icons/bs"
+
+// Gallery types
+interface GalleryImage {
+  id: number
+  alt: string
+  src?: string
+}
+
+interface GalleryCategory {
+  id: string
+  title: string
+  description: string
+  icon: any
+  images: GalleryImage[]
+}
 
 // Gallery categories with placeholder data
-const GALLERY_CATEGORIES = [
+const GALLERY_CATEGORIES: GalleryCategory[] = [
   {
     id: "lawn-care",
     title: "Lawn Care",
     description: "Precision mowing and edging for pristine lawns",
-    icon: Scissors,
+    icon: GiFarmTractor,
     images: [
-      { id: 1, alt: "Freshly mowed lawn in Strongsville" },
-      { id: 2, alt: "Precision edging along walkway" },
-      { id: 3, alt: "Striped lawn pattern in Parma" },
+      { id: 2, alt: "Precision edging along walkway", src: "/images/WT_Landscaping/IMG_1372.webp" },
+      { id: 3, alt: "Striped lawn pattern in Parma", src: "/images/WT_Landscaping/IMG_0277.webp" },
     ],
   },
   {
     id: "mulch",
     title: "Mulch Installation",
-    description: "Premium double-shredded mulch for beautiful beds",
-    icon: Leaf,
+    description: "Premium mulch for beautiful beds",
+    icon: GiWheelbarrow,
     images: [
-      { id: 4, alt: "Fresh mulch installation in Kent" },
-      { id: 5, alt: "Landscape bed with black mulch" },
-      { id: 6, alt: "Mulch around trees in Aurora" },
+      { id: 4, alt: "Fresh mulch installation in Kent", src: "/images/WT_Landscaping/IMG_1450.webp" },
+      { id: 16, alt: "Premium mulch installation", src: "/images/WT_Landscaping/Mulch-2.webp" },
     ],
   },
   {
     id: "trimming",
     title: "Hedge Trimming",
     description: "Expert shaping and pruning services",
-    icon: TreeDeciduous,
+    icon: GiShears,
     images: [
-      { id: 7, alt: "Perfectly trimmed hedges" },
-      { id: 8, alt: "Boxwood hedge shaping" },
-      { id: 9, alt: "Ornamental shrub pruning" },
+      { id: 7, alt: "Perfectly trimmed hedges", src: "/images/WT_Landscaping/IMG_1544.webp" },
+      { id: 8, alt: "Professional shrub trimming and shaping", src: "/images/WT_Landscaping/content-shrub-trimming-1.webp" },
     ],
   },
   {
     id: "cleanups",
     title: "Seasonal Cleanups",
     description: "Spring and fall property preparation",
-    icon: Sparkles,
+    icon: GiRake,
     images: [
-      { id: 10, alt: "Fall leaf cleanup in Brecksville" },
-      { id: 11, alt: "Spring bed cleanup" },
-      { id: 12, alt: "Gutter clearing service" },
+      { id: 10, alt: "Fall leaf cleanup in Brecksville", src: "/images/WT_Landscaping/Cleanup-1.webp" },
+      { id: 11, alt: "Spring bed cleanup", src: "/images/WT_Landscaping/image001.webp" },
     ],
   },
   {
     id: "snow",
     title: "Snow Removal",
     description: "Reliable winter clearing services",
-    icon: Snowflake,
+    icon: BsSnow,
     images: [
-      { id: 13, alt: "Cleared driveway after snowstorm" },
-      { id: 14, alt: "Commercial lot snow removal" },
-      { id: 15, alt: "Sidewalk clearing service" },
+      { id: 13, alt: "Cleared driveway after snowstorm", src: "/images/WT_Landscaping/snow-clearing-screenshot.webp" },
+      { id: 14, alt: "Commercial lot snow removal", src: "/images/WT_Landscaping/IMG_0074_2.webp" },
     ],
   },
 ]
@@ -87,60 +100,68 @@ export default function GalleryPage() {
   return (
     <>
       <Header onOpenQuote={handleOpenQuote} />
-      
+
       <main>
         {/* Hero Section */}
-        <section className="relative pt-[72px]">
-          <div className="bg-ice dark:bg-charcoal/50 py-16 md:py-24">
-            <div className="max-w-7xl mx-auto px-6">
-              <motion.div
-                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="max-w-3xl mx-auto text-center"
-              >
-                <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-orange bg-orange/10 rounded-full">
-                  Our Work
-                </span>
-                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground tracking-wide mb-6 text-balance">
-                  Project Gallery
-                </h1>
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-                  Browse our portfolio of landscaping and property maintenance projects 
-                  across Northeast Ohio. See the quality and care we bring to every job.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Button
-                    onClick={handleOpenQuote}
-                    size="lg"
-                    className="bg-orange text-white hover:bg-orange-hover transition-colors font-semibold px-8"
-                  >
-                    Get Your Free Quote
-                  </Button>
-                  <Link
-                    href={`tel:${BUSINESS_INFO.phone}`}
-                    className="flex items-center gap-2 text-foreground hover:text-orange transition-colors font-medium"
-                  >
-                    <Phone className="w-5 h-5" />
-                    <span>Call {BUSINESS_INFO.phoneFormatted}</span>
-                  </Link>
-                </div>
-              </motion.div>
-            </div>
+        {/* Hero Section */}
+        <section
+          className="relative min-h-[60svh] w-full overflow-hidden flex items-center justify-center pt-20"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 15% 50%, rgba(255, 107, 0, 0.08) 0%, transparent 25%),
+              radial-gradient(circle at 85% 30%, rgba(255, 107, 0, 0.05) 0%, transparent 20%)
+            `
+          }}
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
+          <div className="relative max-w-7xl 2xl:max-w-[1600px] mx-auto px-6 py-16 md:py-24">
+            <motion.div
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-orange bg-orange/10 rounded-full border border-orange/20">
+                Our Work
+              </span>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground tracking-wide mb-6 text-balance">
+                Project Gallery
+              </h1>
+              <p className="text-lg md:text-xl text-neutral-600 leading-relaxed mb-8">
+                Browse our portfolio of landscaping and property maintenance projects
+                across Northeast Ohio. See the quality and care we bring to every job.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <AnimatedButton
+                  onClick={handleOpenQuote}
+                  className="px-8"
+                  wrapperClassName="w-full sm:w-auto"
+                >
+                  Get Your Free Quote
+                </AnimatedButton>
+                <Link
+                  href={`tel:${BUSINESS_INFO.phone}`}
+                  className="flex items-center gap-2 text-foreground hover:text-orange transition-colors font-medium px-6 py-3"
+                >
+                  <Phone className="w-5 h-5" />
+                  <span>Call {BUSINESS_INFO.phoneFormatted}</span>
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Category Filter */}
         <section className="py-8 bg-background border-b border-border">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-6">
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={() => setActiveCategory(null)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeCategory === null
-                    ? "bg-orange text-white"
-                    : "bg-muted text-foreground hover:bg-muted/80"
-                }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCategory === null
+                  ? "bg-orange text-white"
+                  : "bg-muted text-foreground hover:bg-muted/80"
+                  }`}
               >
                 All Projects
               </button>
@@ -148,11 +169,10 @@ export default function GalleryPage() {
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeCategory === category.id
-                      ? "bg-orange text-white"
-                      : "bg-muted text-foreground hover:bg-muted/80"
-                  }`}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCategory === category.id
+                    ? "bg-orange text-white"
+                    : "bg-muted text-foreground hover:bg-muted/80"
+                    }`}
                 >
                   <category.icon className="w-4 h-4" />
                   {category.title}
@@ -163,8 +183,19 @@ export default function GalleryPage() {
         </section>
 
         {/* Gallery Grid */}
-        <section className="py-16 md:py-24 bg-background">
-          <div className="max-w-7xl mx-auto px-6">
+        <section
+          className="relative py-16 md:py-24 bg-white overflow-hidden"
+          style={{
+            backgroundImage: `
+              radial-gradient(ellipse at 0% 0%, rgba(249, 115, 22, 0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 100% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 60%),
+              url("data:image/svg+xml,%3Csvg width='800' height='800' viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M800 584.2C787 581 773.8 578.4 760 577.2c-29-2.5-56 3.7-81.6 13.3-25.5 9.7-47.5 23-66.5 38.8-19 15.8-35.3 32.8-49 51-13.6 18.2-24.8 37.3-33.6 57.3-1.6 4-3 8-4.3 12h32c9.5-26.6 23.4-51.5 41-73.4 17.6-22 38.6-41.4 62-57.5 23.4-16.2 49-28.5 76-36.4 14.5-4.2 29.5-6.5 45-7.7V584.2zM0 318c15.5 1.2 30.5 3.5 45 7.7 27 8 52.6 20.2 76 36.4C144.4 378 165.4 397.5 183 419.5c17.6 22 31.5 46.8 41 73.4 1.3 3.6 2.5 7.3 3.6 11h32.7c-13.7-42.3-36.4-80.4-66.7-111.4C163.3 361.5 125.2 338.8 83 325.2c-26.2-8.5-53.7-11.7-81.5-9.2C-1.5 316.2-3 316.4-4.5 316.7L0 318zM0 457.7c28.3-2.6 56.5 0.5 83.2 9.2 42.2 13.6 80.3 36.3 111.4 66.6 30.3 30.3 53 68.4 66.6 110.6 8.7 26.6 11.8 54.8 9.3 83.2l0 .7h32.3c3.2-38-2.6-76-17.5-111.2-15-35-37.5-66.4-66.2-92.4-28.8-26-62.5-45.6-100-58-37.5-12.4-77.5-16.7-117.6-12.7V457.7zM800 242.3V104.5c-40 4-80 8.3-117.6 20.7-37.5 12.4-71.2 32-100 58-28.7 26-51.2 57.2-66.2 92.4C501.3 311 495.5 349 498.7 387h32.3c-2.4-28.4 0.7-56.6 9.3-83.2 13.6-42.2 36.3-80.3 66.6-110.6C638.2 163 676.3 140.2 718.5 126.7c26.7-8.7 54.9-11.7 83.2-9.2L800 242.3z' fill='%23F97316' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E")
+            `,
+            backgroundSize: '100% 100%, 100% 100%, 800px 800px',
+            backgroundRepeat: 'no-repeat, no-repeat, repeat'
+          }}
+        >
+          <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-6">
             {filteredCategories.map((category, categoryIndex) => (
               <motion.div
                 key={category.id}
@@ -172,7 +203,7 @@ export default function GalleryPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-                className="mb-16 last:mb-0"
+                className="mb-16 pb-16 border-b border-border last:mb-0 last:pb-0 last:border-b-0"
               >
                 {/* Category Header */}
                 <div className="flex items-center gap-3 mb-6">
@@ -190,7 +221,7 @@ export default function GalleryPage() {
                 </div>
 
                 {/* Image Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
                   {category.images.map((image, imageIndex) => (
                     <motion.div
                       key={image.id}
@@ -198,18 +229,24 @@ export default function GalleryPage() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: imageIndex * 0.1 }}
-                      className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-muted border border-border"
+                      className="group relative aspect-[3/2] rounded-xl overflow-hidden bg-muted border border-border shadow-sm"
                     >
-                      {/* Placeholder - ready for real images */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
-                        <Camera className="w-12 h-12 mb-3 opacity-50" />
-                        <span className="text-sm text-center px-4">
-                          {image.alt}
-                        </span>
-                      </div>
-                      
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-orange/0 group-hover:bg-orange/10 transition-colors" />
+                      {image.src ? (
+                        <Image
+                          src={image.src}
+                          alt={image.alt}
+                          fill
+                          className="object-cover transition-all duration-500 brightness-110 saturate-150 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
+                          <Camera className="w-12 h-12 mb-3 opacity-50" />
+                          <span className="text-sm text-center px-4">
+                            {image.alt}
+                          </span>
+                        </div>
+                      )}
                     </motion.div>
                   ))}
                 </div>
@@ -229,7 +266,7 @@ export default function GalleryPage() {
                 More Photos Coming Soon
               </h3>
               <p className="text-muted-foreground max-w-md mx-auto">
-                We are actively updating our gallery with recent projects. 
+                We are actively updating our gallery with recent projects.
                 Check back soon for more examples of our work across Northeast Ohio.
               </p>
             </motion.div>
@@ -238,7 +275,7 @@ export default function GalleryPage() {
 
         {/* CTA Section */}
         <section className="py-16 md:py-20 bg-orange">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-[1440px] mx-auto px-6">
             <motion.div
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -250,17 +287,18 @@ export default function GalleryPage() {
                 Ready to Transform Your Property?
               </h2>
               <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-                Let us bring the same quality and attention to detail to your home. 
+                Let us bring the same quality and attention to detail to your home.
                 Get a free quote and see how we can enhance your outdoor space.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button
+                <AnimatedButton
                   onClick={handleOpenQuote}
-                  size="lg"
-                  className="bg-white text-orange hover:bg-ice transition-colors font-semibold px-8 py-6 text-lg"
+                  className="bg-white text-orange hover:bg-white/90 hover:text-orange"
+                  wrapperClassName="w-full sm:w-auto"
+                  gradientColors="conic-gradient(from 90deg, transparent 0%, transparent 50%, rgba(255, 255, 255, 0.8) 100%)"
                 >
                   Get Your Free Quote
-                </Button>
+                </AnimatedButton>
                 <Link
                   href={`tel:${BUSINESS_INFO.phone}`}
                   className="flex items-center gap-2 text-white hover:text-white/80 transition-colors font-medium"

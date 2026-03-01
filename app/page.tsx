@@ -20,7 +20,7 @@ export default function HomePage() {
   return (
     <>
       <Header onOpenQuote={handleOpenQuote} />
-      
+
       <main>
         <Hero onOpenQuote={handleOpenQuote} />
         <ServicesGrid />

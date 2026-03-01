@@ -2,8 +2,8 @@ import React from "react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Professional Landscaping Services - WT Landscaping - Lawn Care, Mulching & Snow Removal Cleveland",
-  description: "Explore WT Landscaping's professional services: lawn mowing, mulch installation, hedge trimming, seasonal cleanups, and 24/7 snow removal in Strongsville, Parma, North Royalton & Cleveland suburbs. Free quotes!",
+  title: "Professional Property Maintenance Services | WT Property Maintenance",
+  description: "Explore our full range of year-round property care services in Northeast Ohio. From precision lawn mowing and mulch installation to 24/7 snow removal, we keep your property sharp in every season. View our services and get a free estimate today!",
   keywords: [
     "landscaping services Cleveland",
     "lawn mowing Strongsville",
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     "seasonal cleanup Cleveland suburbs",
   ],
   openGraph: {
-    title: "Professional Landscaping Services - WT Landscaping",
-    description: "From precision lawn mowing to professional mulch installation, WT Landscaping provides elite, year-round care for your property in Cleveland suburbs.",
+    title: "Professional Landscaping Services - WT Property Maintenance",
+    description: "From precision lawn mowing to professional mulch installation, WT Property Maintenance provides elite, year-round care for your property in Cleveland suburbs.",
     images: [{ url: "/og-services.jpg", width: 1200, height: 630 }],
     type: "website",
   },
@@ -30,7 +30,7 @@ const servicesSchema = {
   "serviceType": "Landscaping and Property Maintenance",
   "provider": {
     "@type": "LocalBusiness",
-    "name": "WT Landscaping",
+    "name": "WT Property Maintenance",
     "telephone": "440-429-7313",
     "address": {
       "@type": "PostalAddress",
