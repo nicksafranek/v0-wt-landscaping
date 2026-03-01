@@ -105,8 +105,8 @@ export function SocialProof() {
                 key={`${item.id}-${index}`}
                 initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
               >
                 <ComparisonCard
                   beforeImage={item.before}

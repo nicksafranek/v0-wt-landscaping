@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useReducedMotion } from "framer-motion"
@@ -220,36 +220,11 @@ export default function GalleryPage() {
                   </div>
                 </div>
 
-                {/* Image Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                  {category.images.map((image, imageIndex) => (
-                    <motion.div
-                      key={image.id}
-                      initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: imageIndex * 0.1 }}
-                      className="group relative aspect-[3/2] rounded-xl overflow-hidden bg-muted border border-border shadow-sm"
-                    >
-                      {image.src ? (
-                        <Image
-                          src={image.src}
-                          alt={image.alt}
-                          fill
-                          className="object-cover transition-all duration-500 brightness-110 saturate-150 group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
-                          <Camera className="w-12 h-12 mb-3 opacity-50" />
-                          <span className="text-sm text-center px-4">
-                            {image.alt}
-                          </span>
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
+                {/* Mobile Carousel / Desktop Grid */}
+                <CategoryCarousel
+                  images={category.images}
+                  prefersReducedMotion={prefersReducedMotion}
+                />
               </motion.div>
             ))}
 
@@ -321,5 +296,87 @@ export default function GalleryPage() {
         <QuoteModal open={quoteOpen} onOpenChange={setQuoteOpen} />
       )}
     </>
+  )
+}
+
+function CategoryCarousel({ images, prefersReducedMotion }: { images: GalleryImage[], prefersReducedMotion: boolean | null }) {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const loopedImages = [...images, ...images, ...images]
+  const originalLength = images.length
+
+  useEffect(() => {
+    if (scrollRef.current && window.innerWidth < 1024) {
+      const cardWidth = scrollRef.current.offsetWidth * 0.85 + 24 // width + gap
+      scrollRef.current.scrollLeft = cardWidth * originalLength
+    }
+  }, [originalLength])
+
+  const handleScroll = () => {
+    if (scrollRef.current && window.innerWidth < 1024) {
+      const scrollLeft = scrollRef.current.scrollLeft
+      const cardWidth = scrollRef.current.offsetWidth * 0.85 + 24
+      const totalWidth = cardWidth * originalLength
+
+      if (scrollLeft <= 0) {
+        scrollRef.current.scrollLeft = totalWidth
+      } else if (scrollLeft >= totalWidth * 2) {
+        scrollRef.current.scrollLeft = totalWidth
+      }
+
+      const currentScroll = scrollRef.current.scrollLeft
+      const relativeIndex = Math.round(currentScroll / cardWidth) % originalLength
+      if (relativeIndex !== activeIndex) {
+        setActiveIndex(relativeIndex)
+      }
+    }
+  }
+
+  return (
+    <div className="relative">
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex lg:grid lg:grid-cols-2 gap-6 overflow-x-auto lg:overflow-visible px-0 lg:px-0 snap-x snap-mandatory hide-scrollbar pb-6"
+      >
+        {(typeof window !== 'undefined' && window.innerWidth < 1024 ? loopedImages : images).map((image, index) => (
+          <motion.div
+            key={`${image.id}-${index}`}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="group relative aspect-[3/2] rounded-xl overflow-hidden bg-muted border border-border shadow-sm snap-center shrink-0 w-[85vw] lg:w-full"
+          >
+            {image.src ? (
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover transition-all duration-500 brightness-110 saturate-150 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
+                <Camera className="w-12 h-12 mb-3 opacity-50" />
+                <span className="text-sm text-center px-4">{image.alt}</span>
+              </div>
+            )}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Dots indicator - Mobile only */}
+      <div className="flex lg:hidden justify-center gap-2 mt-2">
+        {images.map((_, index) => (
+          <div
+            key={index}
+            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${index === activeIndex ? "bg-orange w-3" : "bg-orange/20"
+              }`}
+          />
+        ))}
+      </div>
+    </div>
   )
 }
