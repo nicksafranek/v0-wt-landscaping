@@ -26,7 +26,7 @@ export function DetailedServiceCard({ service, index }: DetailedServiceCardProps
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
-            className="group bg-white/90 backdrop-blur-2xl border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-orange/50 transition-all duration-700 flex flex-col h-full hover:-translate-y-1"
+            className="group bg-white/90 backdrop-blur-2xl border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-orange/50 transition-all duration-700 flex flex-col h-full hover:-translate-y-1 snap-center w-[85vw] md:w-full shrink-0"
         >
             {/* Service Image */}
             <div className="relative h-48 overflow-hidden bg-muted">
@@ -52,7 +52,7 @@ export function DetailedServiceCard({ service, index }: DetailedServiceCardProps
                         <PulseIndicator />
                     </div>
                 )}
-                <h3 className="font-serif text-2xl text-foreground tracking-wide mb-2">
+                <h3 className="font-serif text-2xl text-foreground tracking-wide mb-2 whitespace-nowrap md:whitespace-normal">
                     {service.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
