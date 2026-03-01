@@ -48,46 +48,19 @@ export function ServiceAreas() {
         </motion.div>
 
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-stretch">
-          {/* Map Column (Mobile: Top, Desktop: Right - Order 2) */}
-          <motion.div
-            className="lg:col-span-7 lg:order-2 lg:sticky lg:top-24"
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="relative w-full h-[250px] md:h-[400px] lg:h-full rounded-xl lg:rounded-2xl overflow-hidden border border-neutral-200 shadow-sm bg-white">
-              <ServiceAreaMap
-                hoveredCity={hoveredCity}
-                onHoverCity={setHoveredCity}
-                showFullServiceArea={true}
-                showMulchServiceArea={true}
-                className="w-full h-full lg:min-h-[600px] 2xl:min-h-[750px]"
-              />
-              {/* Floating Overlay - Mobile Only */}
-              <div className="absolute bottom-3 left-3 right-3 z-10 lg:hidden">
-                <div className="bg-white/90 backdrop-blur-md rounded-lg p-3 shadow-lg border border-white/20">
-                  <p className="text-neutral-900 text-sm font-medium">
-                    Serving North Royalton & the Cleveland suburbs with expert landscaping and snow removal.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* List Column (Mobile: Bottom Horizontal Scroll, Desktop: Left Vertical Stack - Order 1) */}
-          <div className="lg:col-span-5 lg:order-1 flex overflow-x-auto lg:flex-col gap-4 lg:gap-6 pb-4 lg:pb-0 snap-x snap-mandatory hide-scrollbar">
+          {/* Top Row: Cards (Mobile Only Grid) */}
+          <div className="lg:col-span-5 lg:order-1 grid grid-cols-2 lg:flex lg:flex-col gap-3 lg:gap-6">
             {/* Full Service Areas */}
             <motion.div
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="relative min-w-[85vw] lg:min-w-0 h-full snap-center"
+              className="relative h-full"
             >
               {/* Pulsing Gradient Border Overlay */}
               <motion.div
-                className="absolute -inset-[1px] rounded-[13px] z-0 opacity-50"
+                className="absolute -inset-[1px] rounded-lg lg:rounded-[13px] z-0 opacity-50"
                 style={{
                   backgroundImage: 'linear-gradient(45deg, #F97316, #EAB308, #F97316)',
                   backgroundSize: '200% 200%'
@@ -102,26 +75,26 @@ export function ServiceAreas() {
                   ease: "easeInOut"
                 }}
               />
-              <div className="relative z-10 bg-white/95 backdrop-blur-2xl rounded-xl p-4 md:p-8 border border-white/20 h-full shadow-lg">
-                <div className="flex items-center gap-3 mb-4 md:mb-6">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-orange/10 flex items-center justify-center">
+              <div className="relative z-10 bg-white/95 backdrop-blur-2xl rounded-lg lg:rounded-xl p-3 md:p-8 border border-white/20 h-full shadow-sm lg:shadow-lg">
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
+                  <div className="w-7 h-7 md:w-10 md:h-10 rounded-lg bg-orange/10 flex items-center justify-center">
                     <MapPin className="w-4 h-4 md:w-5 md:h-5 text-orange" aria-hidden="true" />
                   </div>
-                  <h3 className="font-serif text-lg md:text-2xl text-neutral-900 tracking-wide">
-                    Full Service Areas
+                  <h3 className="font-serif text-base md:text-2xl text-neutral-900 tracking-wide">
+                    Full Service
                   </h3>
                 </div>
-                <p className="text-neutral-600 text-sm md:text-sm mb-4 md:mb-6">
+                <p className="hidden md:block text-neutral-600 text-sm mb-4 md:mb-6">
                   Complete landscaping and snow removal services.
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
                   {SERVICE_AREAS.full.map((city) => (
                     <CityBadge
                       key={city}
                       city={city}
                       onMouseEnter={() => setHoveredCity(city)}
                       onMouseLeave={() => setHoveredCity(null)}
-                      className="bg-white/90 border-neutral-200 text-sm"
+                      className="bg-white/90 border-neutral-200 text-sm py-0.5 px-2"
                     />
                   ))}
                 </div>
@@ -134,11 +107,11 @@ export function ServiceAreas() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative min-w-[85vw] lg:min-w-0 h-full snap-center"
+              className="relative h-full"
             >
               {/* Pulsing Gradient Border Overlay - Green Theme */}
               <motion.div
-                className="absolute -inset-[1px] rounded-[13px] z-0 opacity-50"
+                className="absolute -inset-[1px] rounded-lg lg:rounded-[13px] z-0 opacity-50"
                 style={{
                   backgroundImage: 'linear-gradient(45deg, #10B981, #059669, #10B981)',
                   backgroundSize: '200% 200%'
@@ -154,19 +127,19 @@ export function ServiceAreas() {
                   delay: 2 // Offset second card for variety
                 }}
               />
-              <div className="relative z-10 bg-white/95 backdrop-blur-2xl rounded-xl p-4 md:p-8 border border-white/20 h-full shadow-lg">
-                <div className="flex items-center gap-3 mb-4 md:mb-6">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+              <div className="relative z-10 bg-white/95 backdrop-blur-2xl rounded-lg lg:rounded-xl p-3 md:p-8 border border-white/20 h-full shadow-sm lg:shadow-lg">
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
+                  <div className="w-7 h-7 md:w-10 md:h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
                     <Leaf className="w-4 h-4 md:w-5 md:h-5 text-green-600" aria-hidden="true" />
                   </div>
-                  <h3 className="font-serif text-lg md:text-2xl text-neutral-900 tracking-wide">
-                    Mulch & Cleanups
+                  <h3 className="font-serif text-base md:text-2xl text-neutral-900 tracking-wide">
+                    Cleanups
                   </h3>
                 </div>
-                <p className="text-neutral-600 text-sm md:text-sm mb-4 md:mb-6">
+                <p className="hidden md:block text-neutral-600 text-sm mb-4 md:mb-6">
                   Premium mulch & seasonal cleanups.
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 md:gap-2">
                   {SERVICE_AREAS.mulchOnly.map((city) => (
                     <CityBadge
                       key={city}
@@ -174,13 +147,32 @@ export function ServiceAreas() {
                       variant="mulch"
                       onMouseEnter={() => setHoveredCity(city)}
                       onMouseLeave={() => setHoveredCity(null)}
-                      className="bg-white/95 border-neutral-200 text-sm"
+                      className="bg-white/95 border-neutral-200 text-sm py-0.5 px-2"
                     />
                   ))}
                 </div>
               </div>
             </motion.div>
           </div>
+
+          {/* Bottom Row: Map (Mobile Only Bottom) */}
+          <motion.div
+            className="lg:col-span-7 lg:order-2 lg:sticky lg:top-24"
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="relative w-full h-[300px] lg:h-full rounded-lg lg:rounded-2xl overflow-hidden border border-neutral-200 shadow-sm bg-white">
+              <ServiceAreaMap
+                hoveredCity={hoveredCity}
+                onHoverCity={setHoveredCity}
+                showFullServiceArea={true}
+                showMulchServiceArea={true}
+                className="w-full h-full lg:min-h-[600px] 2xl:min-h-[750px]"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
