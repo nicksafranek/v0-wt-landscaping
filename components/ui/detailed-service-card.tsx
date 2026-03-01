@@ -26,7 +26,7 @@ export function DetailedServiceCard({ service, index }: DetailedServiceCardProps
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="group bg-white/90 md:backdrop-blur-2xl border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-orange/50 md:transition-all md:duration-700 flex flex-col h-full md:hover:-translate-y-1 snap-center w-[85vw] md:w-full shrink-0"
+            className="group bg-white/90 md:backdrop-blur-2xl border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-orange/50 transition-all duration-700 flex flex-col h-full md:hover:-translate-y-1 snap-center w-[85vw] md:w-full shrink-0"
         >
             {/* Service Image */}
             <div className="relative h-48 overflow-hidden bg-muted">

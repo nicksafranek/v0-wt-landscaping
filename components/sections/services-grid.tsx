@@ -88,7 +88,7 @@ export function ServicesGrid() {
         >
           {/* On Mobile, show looped services. On Desktop, show just original. */}
           {(typeof window !== 'undefined' && window.innerWidth < 768 ? loopedServices : SERVICES_EXTENDED).map((service, index) => (
-            <div key={`${service.id}-${index}`} className="flex-shrink-0 md:flex-shrink w-auto md:w-full">
+            <div key={`${service.id}-${index}`} className="flex-shrink-0 md:shrink w-auto md:w-full">
               <DetailedServiceCard
                 service={service}
                 index={index % originalLength}
