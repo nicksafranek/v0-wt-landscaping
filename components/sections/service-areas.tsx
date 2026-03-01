@@ -49,7 +49,7 @@ export function ServiceAreas() {
 
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-stretch">
           {/* Top Row: Cards (Mobile Only Grid) */}
-          <div className="lg:col-span-5 lg:order-1 grid grid-cols-2 lg:flex lg:flex-col gap-3 lg:gap-6">
+          <div className="lg:col-span-5 lg:order-1 grid grid-cols-1 lg:flex lg:flex-col gap-3 lg:gap-6">
             {/* Full Service Areas */}
             <motion.div
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: -20 }}
