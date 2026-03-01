@@ -226,7 +226,7 @@ export default function ServiceAreasPage() {
                     <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                       <MapPin className="w-5 h-5 text-orange" /> Serving:
                     </h3>
-                    <div className="grid grid-cols-1 [min-width:380px]:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-1.5 xs:gap-2">
                       {SERVICE_AREAS.full.map((city) => {
                         const isHovered = hoveredCity === city
                         return (
@@ -235,16 +235,16 @@ export default function ServiceAreasPage() {
                             onMouseEnter={() => setHoveredCity(city)}
                             onMouseLeave={() => setHoveredCity(null)}
                             className={`
-                                          text-left px-3 xs:px-4 py-2.5 rounded-xl border text-[13px] xs:text-sm font-medium transition-all duration-300
+                                          text-left py-2 rounded-lg xs:rounded-xl border text-[10px] min-[340px]:text-[11px] min-[380px]:text-[13px] xs:text-sm font-medium transition-all duration-300
                                           ${isHovered
                                 ? "border-orange/50 bg-gradient-to-br from-white to-orange/5 shadow-lg -translate-y-1 text-orange"
                                 : "border-white/40 bg-white/80 shadow-sm hover:shadow-md text-black"
                               }
-                                          flex items-center justify-start gap-2 xs:gap-4 group backdrop-blur-sm relative pl-5 xs:pl-6 pr-3 xs:pr-4 overflow-hidden w-full
+                                          flex items-center justify-start gap-1.5 xs:gap-4 group backdrop-blur-sm relative pl-3 xs:pl-6 pr-1 xs:pr-4 overflow-hidden w-full
                                       `}
                           >
-                            {/* Left Side Accent Bar - Always Dark */}
-                            <div className="absolute left-0 inset-y-0 w-1.5 bg-orange" />
+                            {/* Left Side Accent Bar */}
+                            <div className="absolute left-0 inset-y-0 w-1 xs:w-1.5 bg-orange" />
                             <span className="whitespace-nowrap font-semibold">{city}</span>
                           </button>
                         )
@@ -395,7 +395,7 @@ export default function ServiceAreasPage() {
                     <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                       <MapPin className="w-5 h-5 text-forest" /> Serving:
                     </h3>
-                    <div className="flex flex-col gap-2 flex-grow justify-center">
+                    <div className="flex flex-col gap-1.5 xs:gap-2 flex-grow justify-center">
                       {SERVICE_AREAS.mulchOnly.map((city) => {
                         const isHovered = hoveredCity === city
                         return (
@@ -404,16 +404,16 @@ export default function ServiceAreasPage() {
                             onMouseEnter={() => setHoveredCity(city)}
                             onMouseLeave={() => setHoveredCity(null)}
                             className={`
-                                          text-left px-3 xs:px-4 py-2.5 rounded-xl border text-[13px] xs:text-sm font-medium transition-all duration-300
+                                          text-left py-2 rounded-lg xs:rounded-xl border text-[10px] min-[340px]:text-[11px] min-[380px]:text-[13px] xs:text-sm font-medium transition-all duration-300
                                           ${isHovered
                                 ? "border-forest/50 bg-gradient-to-br from-white to-forest/5 shadow-lg -translate-y-1 text-forest"
                                 : "border-white/40 bg-white/80 shadow-sm hover:shadow-md text-black"
                               }
-                                          flex items-center justify-start gap-2 xs:gap-4 group backdrop-blur-sm relative pl-5 xs:pl-6 pr-3 xs:pr-4 overflow-hidden w-full
+                                          flex items-center justify-start gap-1.5 xs:gap-4 group backdrop-blur-sm relative pl-3 xs:pl-6 pr-1 xs:pr-4 overflow-hidden w-full
                                       `}
                           >
-                            {/* Left Side Accent Bar - Always Dark */}
-                            <div className="absolute left-0 inset-y-0 w-1.5 bg-forest" />
+                            {/* Left Side Accent Bar */}
+                            <div className="absolute left-0 inset-y-0 w-1 xs:w-1.5 bg-forest" />
                             <span className="whitespace-nowrap font-semibold">{city}</span>
                           </button>
                         )
