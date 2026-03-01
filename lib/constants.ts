@@ -66,18 +66,18 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
-    id: "mowing",
-    slug: "lawn-mowing",
-    title: "Lawn Mowing & Edging",
-    description: "Reclaim your weekends with precision mowing that gives your lawn a crisp, professional finish.",
-    icon: GiFarmTractor,
-  },
-  {
     id: "mulch",
     slug: "mulch-installation",
     title: "Mulch Installation",
     description: "Instantly refresh your landscape beds with premium mulch, installed to perfection.",
     icon: GiWheelbarrow,
+  },
+  {
+    id: "mowing",
+    slug: "lawn-mowing",
+    title: "Lawn Mowing & Edging",
+    description: "Reclaim your weekends with precision mowing that gives your lawn a crisp, professional finish.",
+    icon: GiFarmTractor,
   },
   {
     id: "cleanups",
@@ -106,15 +106,15 @@ export const SERVICES: Service[] = [
 export const SERVICES_EXTENDED = [
   {
     ...SERVICES[0],
-    image: "/images/WT_Landscaping/stripes-1.webp",
-    valueProposition: "Instant satisfaction each time you pull in the driveway",
-    features: ["Weekly/Bi-Weekly Cuts", "Detailed Edging", "Debris Cleanup"],
-  },
-  {
-    ...SERVICES[1],
     image: "/images/WT_Landscaping/Detroit-Mulch-Installation.webp",
     valueProposition: "Picture perfect beds that elevate curb appeal all year",
     features: ["Bed Edging & Shaping", "Custom Texture", "Weed Barrier Available"],
+  },
+  {
+    ...SERVICES[1],
+    image: "/images/WT_Landscaping/stripes-1.webp",
+    valueProposition: "Instant satisfaction each time you pull in the driveway",
+    features: ["Weekly/Bi-Weekly Cuts", "Detailed Edging", "Debris Cleanup"],
   },
   {
     ...SERVICES[2],
@@ -146,15 +146,15 @@ export const SERVICE_OPTIONS = SERVICES.map(s => ({
 export const HERO_CONTENT = {
   // Visible H1 heading - optimized for user readability
   title: "Landscaping & Snow Removal Cleveland",
-  subtitle: "Year-Round Property Care: Lawn Mowing, Mulch Installation, Seasonal Cleanups, Hedge Trimming, and Snow Removal",
+  subtitle: "Year-Round Property Care: Mulch Installation, Lawn Mowing, Seasonal Cleanups, Hedge Trimming, and Snow Removal",
   ctaText: "Get Your Free Quote",
   secondaryCta: "Call/Text:",
 } as const
 
 // SEO Metadata - separate from visible content
 export const SEO_METADATA = {
-  title: "BEST Landscaping Cleveland - WT Property Maintenance Provides Expert Lawn Care, Mowing, Mulching, Fall And Spring Cleanups, Hedge Trimming, & Snow Removal Near Me. Call Today for a Free Estimate",
-  description: "WT Property Maintenance offers elite, year-round property care in Strongsville, Parma, & North Royalton. Get expert lawn mowing, mulch installation, & 24/7 snow removal. Schedule your free quote today!",
+  title: "BEST Mulch Installation & Landscaping Cleveland - WT Property Maintenance Provides Expert Mulching, Lawn Mowing, Fall And Spring Cleanups, Hedge Trimming, & Snow Removal Near Me. Call Today for a Free Estimate",
+  description: "WT Property Maintenance offers elite, year-round property care in Strongsville, Parma, & North Royalton. Get expert mulch installation, lawn mowing, & 24/7 snow removal. Schedule your free quote today!",
 } as const
 
 // Testimonials

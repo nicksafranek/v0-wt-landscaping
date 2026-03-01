@@ -34,16 +34,6 @@ interface GalleryCategory {
 // Gallery categories with placeholder data
 const GALLERY_CATEGORIES: GalleryCategory[] = [
   {
-    id: "lawn-care",
-    title: "Lawn Care",
-    description: "Precision mowing and edging for pristine lawns",
-    icon: GiFarmTractor,
-    images: [
-      { id: 2, alt: "Precision edging along walkway", src: "/images/WT_Landscaping/IMG_1372.webp" },
-      { id: 3, alt: "Striped lawn pattern in Parma", src: "/images/WT_Landscaping/IMG_0277.webp" },
-    ],
-  },
-  {
     id: "mulch",
     title: "Mulch Installation",
     description: "Premium mulch for beautiful beds",
@@ -51,6 +41,16 @@ const GALLERY_CATEGORIES: GalleryCategory[] = [
     images: [
       { id: 4, alt: "Fresh mulch installation in Kent", src: "/images/WT_Landscaping/IMG_1450.webp" },
       { id: 16, alt: "Premium mulch installation", src: "/images/WT_Landscaping/Mulch-2.webp" },
+    ],
+  },
+  {
+    id: "lawn-care",
+    title: "Lawn Care",
+    description: "Precision mowing and edging for pristine lawns",
+    icon: GiFarmTractor,
+    images: [
+      { id: 2, alt: "Precision edging along walkway", src: "/images/WT_Landscaping/IMG_1372.webp" },
+      { id: 3, alt: "Striped lawn pattern in Parma", src: "/images/WT_Landscaping/IMG_0277.webp" },
     ],
   },
   {
