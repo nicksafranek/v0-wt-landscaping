@@ -345,8 +345,8 @@ function CategoryCarousel({ images, prefersReducedMotion }: { images: GalleryIma
             key={`${image.id}-${index}`}
             initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
             className="group relative aspect-[3/2] rounded-xl overflow-hidden bg-muted border border-border shadow-sm snap-center shrink-0 w-[85vw] lg:w-full"
           >
             {image.src ? (
