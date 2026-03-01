@@ -140,14 +140,14 @@ function MapController({ showFullServiceArea, showMulchServiceArea }: { showFull
         // shape is reliably visible even with narrower container aspects
         if (allCoords.length > 0) {
             // Increased to 60px padding so the shapes aren't clipped on 13" laptop screens
-            // On mobile, we use a tighter padding to frame the area more closely
-            const padding: [number, number] = isMobile ? [20, 20] : [60, 60]
+            // Increased padding to ensure shapes aren't clipped
+            const padding: [number, number] = isMobile ? [40, 40] : [60, 60]
             map.fitBounds(bounds, { padding, animate: false })
 
             if (isMobile) {
-                // Force a slightly tighter zoom on mobile after fitting bounds
+                // Ensure we don't zoom in too much on mobile, just use the fitted bounds
                 const currentZoom = map.getBoundsZoom(bounds)
-                map.setZoom(currentZoom + 0.5, { animate: false })
+                map.setZoom(currentZoom, { animate: false })
             }
         }
     }, [map, isMobile]) // Handle orientation/rezize via isMobile
