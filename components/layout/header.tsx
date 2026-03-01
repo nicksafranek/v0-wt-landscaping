@@ -42,9 +42,9 @@ export function Header({ onOpenQuote }: HeaderProps) {
               />
             </div>
             {/* Mobile Logo (Full Horizontal) */}
-            <div className="block md:hidden relative w-[130px] h-[36px]">
+            <div className="block md:hidden relative w-[140px] h-[40px]">
               <Image
-                src="/images/logo/logo-full2.svg"
+                src="/images/logo/logo-full.svg"
                 alt="WT Logo"
                 fill
                 className="object-contain"

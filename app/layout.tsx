@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Bebas_Neue } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
-import { MobileCTA } from '@/components/layout/mobile-cta'
+
 import './globals.css'
 
 const inter = Inter({
@@ -107,7 +107,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${bebasNeue.variable} font-sans antialiased pb-20 md:pb-0 [scrollbar-gutter:stable]`}>
+      <body className={`${inter.variable} ${bebasNeue.variable} font-sans antialiased md:pb-0 [scrollbar-gutter:stable]`}>
         {children}
         <Toaster />
         <Analytics />

@@ -47,7 +47,7 @@ export function ServiceAreas() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-12 items-stretch">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-4 md:gap-8 items-stretch">
           {/* Map Column (Mobile: Top, Desktop: Right - Order 2) */}
           <motion.div
             className="col-span-1 lg:col-span-7 lg:order-2 lg:sticky lg:top-24"
@@ -103,7 +103,7 @@ export function ServiceAreas() {
                     Full Service Areas
                   </h3>
                 </div>
-                <p className="text-neutral-600 text-[10px] md:text-sm mb-3 md:mb-6">
+                <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-6">
                   Complete landscaping and snow removal services.
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -155,7 +155,7 @@ export function ServiceAreas() {
                     Mulch & Cleanups
                   </h3>
                 </div>
-                <p className="text-neutral-600 text-[10px] md:text-sm mb-3 md:mb-6">
+                <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-6">
                   Premium mulch & seasonal cleanups.
                 </p>
                 <div className="flex flex-wrap gap-2">
