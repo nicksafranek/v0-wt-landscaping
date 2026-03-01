@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { MapContainer, TileLayer, Marker, Polygon, useMap } from "react-leaflet"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { SERVICE_AREAS } from "@/lib/constants"
 
 // Coordinates for service areas including new boundary points
@@ -132,14 +133,24 @@ function MapController({ showFullServiceArea, showMulchServiceArea }: { showFull
 
     const bounds = L.latLngBounds(allCoords)
 
+    const isMobile = useIsMobile()
+
     useEffect(() => {
         // Just fit bounds once on load, with a small padding to ensure the full highlight
         // shape is reliably visible even with narrower container aspects
         if (allCoords.length > 0) {
             // Increased to 60px padding so the shapes aren't clipped on 13" laptop screens
-            map.fitBounds(bounds, { padding: [60, 60], animate: false })
+            // On mobile, we use a tighter padding to frame the area more closely
+            const padding: [number, number] = isMobile ? [20, 20] : [60, 60]
+            map.fitBounds(bounds, { padding, animate: false })
+
+            if (isMobile) {
+                // Force a slightly tighter zoom on mobile after fitting bounds
+                const currentZoom = map.getBoundsZoom(bounds)
+                map.setZoom(currentZoom + 0.5, { animate: false })
+            }
         }
-    }, [map]) // Removed other dependencies to prevent re-fitting on minor updates
+    }, [map, isMobile]) // Handle orientation/rezize via isMobile
 
     return null
 }
@@ -153,13 +164,21 @@ export default function LeafletMap({
     // Use SERVICE_AREAS.full for pins
     const pinCities = SERVICE_AREAS.full
 
+    const isMobile = useIsMobile()
+
     return (
         <MapContainer
             center={CENTER}
             zoom={ZOOM_LEVEL}
             scrollWheelZoom={false}
+            dragging={!isMobile}
             className="w-full h-full bg-ice/50"
             zoomControl={false}
+            touchZoom={!isMobile}
+            doubleClickZoom={!isMobile}
+            boxZoom={!isMobile}
+            keyboard={!isMobile}
+            tap={!isMobile}
             attributionControl={false}
             zoomSnap={0.1}
             zoomDelta={0.1}

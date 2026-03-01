@@ -47,10 +47,10 @@ export function ServiceAreas() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-12 items-stretch">
           {/* Map Column (Mobile: Top, Desktop: Right - Order 2) */}
           <motion.div
-            className="lg:col-span-7 lg:order-2 lg:sticky lg:top-24"
+            className="col-span-1 lg:col-span-7 lg:order-2 lg:sticky lg:top-24"
             initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -62,13 +62,13 @@ export function ServiceAreas() {
                 onHoverCity={setHoveredCity}
                 showFullServiceArea={true}
                 showMulchServiceArea={true}
-                className="w-full h-full min-h-[500px] lg:min-h-[600px] 2xl:min-h-[750px]"
+                className="w-full h-full min-h-[300px] md:min-h-[500px] lg:min-h-[600px] 2xl:min-h-[750px]"
               />
             </div>
           </motion.div>
 
           {/* List Column (Mobile: Bottom, Desktop: Left - Order 1) */}
-          <div className="lg:col-span-5 lg:order-1 flex flex-col gap-6">
+          <div className="col-span-1 lg:col-span-5 lg:order-1 flex flex-col gap-3 lg:gap-6">
             {/* Full Service Areas */}
             <motion.div
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: -20 }}
@@ -94,16 +94,16 @@ export function ServiceAreas() {
                   ease: "easeInOut"
                 }}
               />
-              <div className="relative z-10 bg-white/90 backdrop-blur-2xl rounded-xl p-8 border border-white/20 h-full shadow-lg">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-lg bg-orange/10 flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-orange" aria-hidden="true" />
+              <div className="relative z-10 bg-white/90 backdrop-blur-2xl rounded-xl p-3 md:p-8 border border-white/20 h-full shadow-lg">
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-orange/10 flex items-center justify-center">
+                    <MapPin className="w-4 h-4 md:w-5 md:h-5 text-orange" aria-hidden="true" />
                   </div>
-                  <h3 className="font-serif text-2xl text-neutral-900 tracking-wide">
+                  <h3 className="font-serif text-lg md:text-2xl text-neutral-900 tracking-wide">
                     Full Service Areas
                   </h3>
                 </div>
-                <p className="text-neutral-600 text-sm mb-6">
+                <p className="text-neutral-600 text-[10px] md:text-sm mb-3 md:mb-6">
                   Complete landscaping and snow removal services.
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -146,17 +146,17 @@ export function ServiceAreas() {
                   delay: 2 // Offset second card for variety
                 }}
               />
-              <div className="relative z-10 bg-white/90 backdrop-blur-2xl rounded-xl p-8 border border-white/20 h-full shadow-lg">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
-                    <Leaf className="w-5 h-5 text-green-600" aria-hidden="true" />
+              <div className="relative z-10 bg-white/90 backdrop-blur-2xl rounded-xl p-3 md:p-8 border border-white/20 h-full shadow-lg">
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+                    <Leaf className="w-4 h-4 md:w-5 md:h-5 text-green-600" aria-hidden="true" />
                   </div>
-                  <h3 className="font-serif text-2xl text-neutral-900 tracking-wide">
-                    Mulch & Seasonal Cleanups
+                  <h3 className="font-serif text-lg md:text-2xl text-neutral-900 tracking-wide">
+                    Mulch & Cleanups
                   </h3>
                 </div>
-                <p className="text-neutral-600 text-sm mb-6">
-                  Premium mulch installation and spring/fall cleanups.
+                <p className="text-neutral-600 text-[10px] md:text-sm mb-3 md:mb-6">
+                  Premium mulch & seasonal cleanups.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {SERVICE_AREAS.mulchOnly.map((city) => (

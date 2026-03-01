@@ -110,7 +110,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${bebasNeue.variable} font-sans antialiased pb-20 md:pb-0 [scrollbar-gutter:stable]`}>
         {children}
         <Toaster />
-        <MobileCTA />
         <Analytics />
       </body>
     </html>

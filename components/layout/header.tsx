@@ -41,11 +41,11 @@ export function Header({ onOpenQuote }: HeaderProps) {
                 priority
               />
             </div>
-            {/* Mobile Logo (Small Icon) */}
-            <div className="block md:hidden relative w-[48px] h-[48px]">
+            {/* Mobile Logo (Full Horizontal) */}
+            <div className="block md:hidden relative w-[130px] h-[36px]">
               <Image
-                src="/images/logo/logo-small2.svg"
-                alt="WT Logo Icon"
+                src="/images/logo/logo-full2.svg"
+                alt="WT Logo"
                 fill
                 className="object-contain"
                 priority
@@ -99,16 +99,31 @@ export function Header({ onOpenQuote }: HeaderProps) {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-neutral-900 h-12 w-12 shrink-0"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu className="w-7 h-7" />
-          </Button>
+          {/* Mobile Actions & Menu Button */}
+          <div className="flex md:hidden items-center gap-2">
+            <Link
+              href={`tel:${BUSINESS_INFO.phone}`}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-orange/10 text-orange"
+              aria-label="Call Now"
+            >
+              <Phone className="w-5 h-5" />
+            </Link>
+            <Button
+              onClick={onOpenQuote}
+              className="h-10 px-4 bg-orange text-white text-xs font-bold rounded-full"
+            >
+              Quote
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-neutral-900 h-10 w-10"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu className="w-6 h-6" />
+            </Button>
+          </div>
         </div>
       </header>
 

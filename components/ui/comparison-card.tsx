@@ -21,7 +21,7 @@ export function ComparisonCard({
             <div className="absolute inset-0 rounded-3xl border-[0.5px] border-slate-900/10 pointer-events-none z-20" />
 
             {/* Image Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-0.5 bg-slate-200">
+            <div className="grid grid-cols-2 gap-0.5 bg-slate-200">
                 {/* Before Image */}
                 <div className="relative group/before overflow-hidden aspect-square bg-muted">
                     <div className="absolute top-4 left-4 z-10">
