@@ -133,7 +133,7 @@ export function ServiceAreas() {
                     <Leaf className="w-4 h-4 md:w-5 md:h-5 text-green-600" aria-hidden="true" />
                   </div>
                   <h3 className="font-serif text-base md:text-2xl text-neutral-900 tracking-wide">
-                    Cleanups
+                    Mulch & Cleanups
                   </h3>
                 </div>
                 <p className="hidden md:block text-neutral-600 text-sm mb-4 md:mb-6">

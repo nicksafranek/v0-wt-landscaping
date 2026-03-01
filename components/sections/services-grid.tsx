@@ -80,21 +80,47 @@ export function ServicesGrid() {
           </motion.div>
         </div>
 
-        {/* Mobile Carousel / Desktop Grid Container */}
+        {/* Mobile Carousel (Visible on Mobile Only) */}
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="flex md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto md:overflow-visible gap-6 md:gap-8 pb-8 px-6 md:px-8 snap-x snap-mandatory hide-scrollbar"
+          className="flex md:hidden overflow-x-auto gap-6 pb-8 px-6 snap-x snap-mandatory hide-scrollbar"
         >
-          {/* On Mobile, show looped services. On Desktop, show just original. */}
-          {(typeof window !== 'undefined' && window.innerWidth < 768 ? loopedServices : SERVICES_EXTENDED).map((service, index) => (
-            <div key={`${service.id}-${index}`} className="flex-shrink-0 md:shrink w-auto md:w-full">
+          {loopedServices.map((service, index) => (
+            <div key={`${service.id}-${index}`} className="flex-shrink-0 w-auto">
               <DetailedServiceCard
                 service={service}
                 index={index % originalLength}
               />
             </div>
           ))}
+        </div>
+
+        {/* Desktop Grid (Visible on md and up) */}
+        <div className="hidden md:block px-8">
+          {/* Row 1 - 3 Services */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {SERVICES_EXTENDED.slice(0, 3).map((service, index) => (
+              <DetailedServiceCard
+                key={service.id}
+                service={service}
+                index={index}
+              />
+            ))}
+          </div>
+
+          {/* Row 2 - 2 Services Centered */}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+              {SERVICES_EXTENDED.slice(3, 5).map((service, index) => (
+                <DetailedServiceCard
+                  key={service.id}
+                  service={service}
+                  index={index + 3}
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Progress Dots - Mobile Only */}
