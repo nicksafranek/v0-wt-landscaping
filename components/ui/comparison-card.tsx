@@ -16,7 +16,7 @@ export function ComparisonCard({
     afterAlt,
 }: ComparisonCardProps) {
     return (
-        <div className="bg-white rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1),0_40px_80px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.05)] group hover:shadow-[0_45px_100px_rgba(0,0,0,0.2),0_15px_30px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-700 border-none relative group">
+        <div className="bg-white rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1),0_40px_80px_rgba(0,0,0,0.05),0_10px_20px_rgba(0,0,0,0.05)] group hover:shadow-[0_45px_100px_rgba(0,0,0,0.2),0_15px_30px_rgba(0,0,0,0.1)] md:hover:-translate-y-2 md:transition-all duration-700 border-none relative group snap-center w-[85vw] md:w-full shrink-0">
             {/* Engraved Inner Border */}
             <div className="absolute inset-0 rounded-3xl border-[0.5px] border-slate-900/10 pointer-events-none z-20" />
 
