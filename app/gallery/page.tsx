@@ -59,8 +59,8 @@ const GALLERY_CATEGORIES: GalleryCategory[] = [
     description: "Expert shaping and pruning services",
     icon: GiShears,
     images: [
-      { id: 7, alt: "Perfectly trimmed hedges", src: "/images/WT_Landscaping/IMG_1544.webp" },
       { id: 8, alt: "Professional shrub trimming and shaping", src: "/images/WT_Landscaping/content-shrub-trimming-1.webp" },
+      { id: 7, alt: "Perfectly trimmed hedges", src: "/images/WT_Landscaping/IMG_1544.webp" },
     ],
   },
   {
