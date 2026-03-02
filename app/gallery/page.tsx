@@ -69,8 +69,8 @@ const GALLERY_CATEGORIES: GalleryCategory[] = [
     description: "Spring and fall property preparation",
     icon: GiRake,
     images: [
-      { id: 10, alt: "Fall leaf cleanup in Brecksville", src: "/images/WT_Landscaping/Cleanup-1.webp" },
       { id: 11, alt: "Spring bed cleanup", src: "/images/WT_Landscaping/image001.webp" },
+      { id: 10, alt: "Fall leaf cleanup in Brecksville", src: "/images/WT_Landscaping/Cleanup-1.webp" },
     ],
   },
   {
