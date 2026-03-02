@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight, Check } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 import type { ElementType } from "react"
 import { SERVICES_EXTENDED as CONSTANTS_SERVICES } from "@/lib/constants"
 import { SERVICES_EXTENDED } from "@/lib/services-data"
@@ -18,12 +19,13 @@ interface DetailedServiceCardProps {
 
 export function DetailedServiceCard({ service, index }: DetailedServiceCardProps) {
     const prefersReducedMotion = useReducedMotion()
+    const isMobile = useIsMobile()
     const Icon = service.icon as ElementType
 
     return (
         <motion.article
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: isMobile ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="group bg-white/90 md:backdrop-blur-2xl border border-white/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:border-orange/50 transition-all duration-700 flex flex-col h-full md:hover:-translate-y-1 snap-center w-[85vw] md:w-full shrink-0"

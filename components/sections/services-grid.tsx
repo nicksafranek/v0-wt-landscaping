@@ -58,8 +58,8 @@ export function ServicesGrid() {
       <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto">
         <div className="px-6 lg:px-8">
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
