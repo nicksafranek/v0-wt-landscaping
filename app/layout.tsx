@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BEST Landscaping Cleveland - WT Property Maintenance Provides Expert Lawn Care, Mowing, Mulching, Fall And Spring Cleanups, Hedge Trimming, & Snow Removal Near Me. Call Today for a Free Estimate",
     description: "Experience the excitement of a perfectly maintained yard. Elite landscaping and year-round property care for North Royalton and the Cleveland suburbs.",
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/images/WT_Landscaping/hero-background.webp', width: 1200, height: 630 }],
     type: 'website',
   },
   icons: {

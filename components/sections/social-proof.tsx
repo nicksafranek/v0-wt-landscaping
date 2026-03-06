@@ -24,39 +24,58 @@ export function SocialProof() {
   const prefersReducedMotion = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const ticking = useRef(false)
 
   // Triple for infinite loop
   const loopedImages = [...BEFORE_AFTER_IMAGES, ...BEFORE_AFTER_IMAGES, ...BEFORE_AFTER_IMAGES]
   const originalLength = BEFORE_AFTER_IMAGES.length
 
-  // Initialize scroll position to the middle set
+  // Handle scroll with requestAnimationFrame and passive listener
   useEffect(() => {
-    if (scrollRef.current && window.innerWidth < 1024) {
-      const cardWidth = scrollRef.current.offsetWidth * 0.85 + 32 // card width + gap-8
-      scrollRef.current.scrollLeft = cardWidth * originalLength
-    }
-  }, [originalLength])
+    const scrollContainer = scrollRef.current
+    if (!scrollContainer) return
 
-  const handleScroll = () => {
-    if (scrollRef.current && window.innerWidth < 1024) {
-      const scrollLeft = scrollRef.current.scrollLeft
-      const cardWidth = scrollRef.current.offsetWidth * 0.85 + 32 // width + gap-8
+    const updateScroll = () => {
+      if (window.innerWidth < 1024) {
+        const scrollLeft = scrollContainer.scrollLeft
+        const cardWidth = scrollContainer.offsetWidth * 0.85 + 32
+        const totalWidth = cardWidth * originalLength
 
-      const totalWidth = cardWidth * originalLength
+        if (scrollLeft <= 0) {
+          scrollContainer.scrollLeft = totalWidth
+        } else if (scrollLeft >= totalWidth * 2) {
+          scrollContainer.scrollLeft = totalWidth
+        }
 
-      if (scrollLeft <= 0) {
-        scrollRef.current.scrollLeft = totalWidth
-      } else if (scrollLeft >= totalWidth * 2) {
-        scrollRef.current.scrollLeft = totalWidth
+        const currentScroll = scrollContainer.scrollLeft
+        const relativeIndex = Math.round(currentScroll / cardWidth) % originalLength
+        if (relativeIndex !== activeIndex) {
+          setActiveIndex(relativeIndex)
+        }
       }
+      ticking.current = false
+    }
 
-      const currentScroll = scrollRef.current.scrollLeft
-      const relativeIndex = Math.round(currentScroll / cardWidth) % originalLength
-      if (relativeIndex !== activeIndex) {
-        setActiveIndex(relativeIndex)
+    const onScrollHandler = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateScroll)
+        ticking.current = true
       }
     }
-  }
+
+    // Manual listener for passive: true support
+    scrollContainer.addEventListener('scroll', onScrollHandler, { passive: true })
+
+    // Initialize scroll position to the middle set
+    if (window.innerWidth < 1024) {
+      const cardWidth = scrollContainer.offsetWidth * 0.85 + 32
+      scrollContainer.scrollLeft = cardWidth * originalLength
+    }
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', onScrollHandler)
+    }
+  }, [originalLength, activeIndex])
 
   return (
     <>
@@ -97,7 +116,6 @@ export function SocialProof() {
           {/* Comparison Cards Carousel (Mobile/Tablet) / Grid (Desktop) */}
           <div
             ref={scrollRef}
-            onScroll={handleScroll}
             className="flex lg:grid lg:grid-cols-2 gap-8 overflow-x-auto lg:overflow-visible px-6 lg:px-0 snap-x snap-mandatory hide-scrollbar pb-8"
           >
             {(typeof window !== 'undefined' && window.innerWidth < 1024 ? loopedImages : BEFORE_AFTER_IMAGES).map((item, index) => (
