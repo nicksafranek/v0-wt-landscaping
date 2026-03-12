@@ -35,14 +35,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/favicon-brand.svg',
+        url: '/images/logo/logo-small.svg',
         type: 'image/svg+xml',
       },
     ],
     apple: [
-      { url: '/favicon-brand.svg' },
+      { url: '/images/logo/logo-small.svg' },
     ],
-    shortcut: '/favicon-brand.svg',
   },
   generator: 'v0.app'
 }
