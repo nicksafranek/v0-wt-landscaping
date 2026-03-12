@@ -35,14 +35,14 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/images/logo/logo_pfp_final.jpg',
-        type: 'image/jpeg',
+        url: '/favicon-brand.svg',
+        type: 'image/svg+xml',
       },
     ],
     apple: [
-      { url: '/images/logo/logo_pfp_final.jpg' },
+      { url: '/favicon-brand.svg' },
     ],
-    shortcut: '/images/logo/logo_pfp_final.jpg',
+    shortcut: '/favicon-brand.svg',
   },
   generator: 'v0.app'
 }
