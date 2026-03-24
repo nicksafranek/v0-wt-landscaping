@@ -170,25 +170,25 @@ export default function ServiceAreasPage() {
                       </li>
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-orange shrink-0" aria-hidden="true" />
-                        <Link href="/services/mulch" className="hover:text-orange transition-colors">
+                        <Link href="/services/mulch-installation" className="hover:text-orange transition-colors">
                           Mulch Installation
                         </Link>
                       </li>
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-orange shrink-0" aria-hidden="true" />
-                        <Link href="/services/trimming" className="hover:text-orange transition-colors">
+                        <Link href="/services/hedge-trimming" className="hover:text-orange transition-colors">
                           Hedge Trimming
                         </Link>
                       </li>
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-orange shrink-0" aria-hidden="true" />
-                        <Link href="/services/cleanups" className="hover:text-orange transition-colors">
+                        <Link href="/services/seasonal-cleanups" className="hover:text-orange transition-colors">
                           Spring & Fall Cleanups
                         </Link>
                       </li>
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-orange shrink-0" aria-hidden="true" />
-                        <Link href="/services/snow" className="hover:text-orange transition-colors">
+                        <Link href="/services/snow-removal" className="hover:text-orange transition-colors">
                           Snow Removal
                         </Link>
                       </li>
@@ -351,25 +351,25 @@ export default function ServiceAreasPage() {
                       </li>
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-forest shrink-0" aria-hidden="true" />
-                        <Link href="/services/mulch" className="hover:text-forest transition-colors">
+                        <Link href="/services/mulch-installation" className="hover:text-forest transition-colors">
                           Mulch Installation
                         </Link>
                       </li>
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-forest shrink-0" aria-hidden="true" />
-                        <Link href="/services/trimming" className="hover:text-forest transition-colors">
+                        <Link href="/services/hedge-trimming" className="hover:text-forest transition-colors">
                           Hedge Trimming
                         </Link>
                       </li>
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-forest shrink-0" aria-hidden="true" />
-                        <Link href="/services/cleanups" className="hover:text-forest transition-colors">
+                        <Link href="/services/seasonal-cleanups" className="hover:text-forest transition-colors">
                           Spring Cleanups
                         </Link>
                       </li>
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-forest shrink-0" aria-hidden="true" />
-                        <Link href="/services/cleanups" className="hover:text-forest transition-colors">
+                        <Link href="/services/seasonal-cleanups" className="hover:text-forest transition-colors">
                           Fall Cleanups
                         </Link>
                       </li>
