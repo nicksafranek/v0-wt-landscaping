@@ -276,7 +276,7 @@ export default function ServiceAreasPage() {
           </div >
         </section >
 
-        {/* Mulch & Cleanups Areas Section */}
+        {/* Landscaping Service Areas Section */}
         <section
           className="relative py-16 md:py-24 bg-white overflow-hidden"
           style={{
@@ -303,11 +303,11 @@ export default function ServiceAreasPage() {
                   <MapPinned className="w-6 h-6 text-forest" aria-hidden="true" />
                 </div>
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground tracking-wide">
-                  Mulch & Seasonal Cleanups
+                  Landscaping Service
                 </h2>
               </div>
               <p className="text-neutral-600 max-w-2xl">
-                We extend our premium mulch installation and seasonal cleanup services
+                We extend our spring, summer, and fall landscaping services
                 to these additional Northeast Ohio communities.
               </p>
             </motion.div>
@@ -345,8 +345,20 @@ export default function ServiceAreasPage() {
                     <ul className="space-y-3">
                       <li className="flex items-center gap-3 text-foreground">
                         <Check className="w-5 h-5 text-forest shrink-0" aria-hidden="true" />
+                        <Link href="/services/lawn-mowing" className="hover:text-forest transition-colors">
+                          Lawn Mowing & Edging
+                        </Link>
+                      </li>
+                      <li className="flex items-center gap-3 text-foreground">
+                        <Check className="w-5 h-5 text-forest shrink-0" aria-hidden="true" />
                         <Link href="/services/mulch" className="hover:text-forest transition-colors">
                           Mulch Installation
+                        </Link>
+                      </li>
+                      <li className="flex items-center gap-3 text-foreground">
+                        <Check className="w-5 h-5 text-forest shrink-0" aria-hidden="true" />
+                        <Link href="/services/trimming" className="hover:text-forest transition-colors">
+                          Hedge Trimming
                         </Link>
                       </li>
                       <li className="flex items-center gap-3 text-foreground">

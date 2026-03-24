@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WT Property Maintenance - Premium Door Hanger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orange: {
+                            DEFAULT: '#F97316',
+                            hover: '#EA580C'
+                        },
+                        charcoal: '#0F172A', /* Darker near-black charcoal */
+                        ice: '#F8FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            color: #1E293B;
+            padding: 2rem;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 
+           Dimensions: 3.5" x 8.5" with a 0.125" bleed.
+           Total size equals 3.75" x 8.75".
+        */
+        .door-hanger {
+            width: 3.75in;
+            height: 8.75in;
+            position: relative;
+            overflow: hidden;
+            background-color: #0F172A;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            /* Scaling it up 1.5x on screen just so it's easier to view without zooming in */
+            transform: scale(1.4);
+            transform-origin: top center;
+            margin-bottom: 250px;
+            /* Offset scaled height margin */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bleed-guide {
+            position: absolute;
+            top: 0.125in;
+            left: 0.125in;
+            right: 0.125in;
+            bottom: 0.125in;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .print-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background-color: #0F172A;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            font-family: 'Montserrat', sans-serif;
+            z-index: 100;
+        }
+
+        .print-btn:hover {
+            background-color: #F97316;
+        }
+
+        /* Ensure printing operates 1:1 true to layout, no scaling */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                display: block;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .door-hanger {
+                box-shadow: none !important;
+                border: none !important;
+                transform: scale(1) !important;
+                margin-bottom: 0 !important;
+                /* Standard exact print dimensions */
+                width: 3.75in !important;
+                height: 8.75in !important;
+            }
+
+            .bleed-guide {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="max-w-4xl mx-auto pb-20 pt-10 no-print">
+        <div class="flex justify-between items-end mb-12 border-b border-gray-200 pb-6">
+            <div>
+                <h1 class="text-3xl font-montserrat font-bold text-charcoal mb-2">Premium Door Hanger Design</h1>
+                <p class="text-slate-500 text-lg">WT Property Maintenance</p>
+                <div
+                    class="flex items-center gap-2 mt-4 text-sm text-gray-600 bg-white px-4 py-3 rounded-lg border border-gray-200 shadow-sm inline-flex">
+                    <svg class="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <div>
+                        <span class="font-bold">Printer Specifications:</span> 3.5" x 8.5" finished size (3.75" x 8.75"
+                        with 0.125" bleed).<br>
+                        <span class="font-bold">Lamination Note:</span> Please print with a <strong>Matte
+                            Finish</strong> for a premium feel. Avoid glossy lamination.
+                    </div>
+                </div>
+            </div>
+            <button onclick="window.print()" class="print-btn relative top-0 right-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+                    <path
+                        d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
+                </svg>
+                Print Design
+            </button>
+        </div>
+    </div>
+
+    <div class="door-hanger bg-charcoal text-white tracking-tight">
+        <!-- Visual Bleed Guide for Screen viewing only -->
+        <div class="bleed-guide"></div>
+
+        <!-- High Contrast Background Setup -->
+        <div class="absolute inset-0 z-0">
+            <!-- Background Image layer -->
+            <div class="absolute inset-0 bg-charcoal">
+                <!-- Using the generated image file path -->
+                <img src="/Users/nicksafranek/.gemini/antigravity/brain/a7a516d1-e059-45d3-af3b-37219636374f/manicured_lawn_bg_1773772906646.png"
+                    class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+            </div>
+            <!-- Gradient to darken the bottom and improve text legibility -->
+            <div class="absolute inset-0 bg-gradient-to-b from-charcoal/20 via-charcoal/80 to-charcoal"></div>
+        </div>
+
+        <!-- 2-inch No Print Zone for Die Cut -->
+        <div class="relative z-10 h-[2in] w-full flex flex-col justify-start items-center pt-[0.2in]">
+            <!-- The physical circle cut guide (1.25" circle) -->
+            <div
+                class="w-[1.25in] h-[1.25in] rounded-full border-[1.5px] border-dashed border-white/40 flex items-center justify-center backdrop-blur-sm bg-black/10">
+                <span
+                    class="text-[8px] font-sans font-semibold uppercase tracking-widest text-white/50 text-center leading-tight">
+                    Die Cut<br>Circle
+                </span>
+            </div>
+
+            <!-- Optional slit cut indicator normally seen on door hangers -->
+            <div
+                class="absolute top-0 right-1/2 translate-x-[0.625in] translate-y-[0.8in] w-[1in] h-[1px] border-b-[1.5px] border-dashed border-white/40 -rotate-30 origin-left">
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="relative z-10 px-[0.35in] flex flex-col h-[6.75in] justify-between pb-[0.35in]">
+
+            <!-- Headline Section -->
+            <div class="mt-2">
+                <h1 class="font-montserrat font-extrabold text-[32px] leading-[1.05] tracking-tight drop-shadow-lg">
+                    <span class="text-orange block drop-shadow-xl">THE SHARPEST</span>
+                    <span class="text-white block">PROPERTY IN</span>
+                    <span class="text-white block">THE NEIGHBORHOOD.</span>
+                </h1>
+
+                <div class="w-12 h-1 bg-orange mt-5 rounded-full"></div>
+            </div>
+
+            <!-- Middle Services Checklist -->
+            <div class="py-4">
+                <ul class="space-y-[0.45rem] font-sans font-medium text-[16px] text-ice">
+                    <li
+                        class="flex items-center gap-3 bg-white/5 py-1.5 px-3 rounded-md backdrop-blur-sm border border-white/5">
+                        <svg class="w-5 h-5 text-orange shrink-0 drop-shadow-md" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Lawn Mowing
+                    </li>
+                    <li
+                        class="flex items-center gap-3 bg-white/5 py-1.5 px-3 rounded-md backdrop-blur-sm border border-white/5">
+                        <svg class="w-5 h-5 text-orange shrink-0 drop-shadow-md" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Mulch Installation
+                    </li>
+                    <li
+                        class="flex items-center gap-3 bg-white/5 py-1.5 px-3 rounded-md backdrop-blur-sm border border-white/5">
+                        <svg class="w-5 h-5 text-orange shrink-0 drop-shadow-md" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Seasonal Cleanups
+                    </li>
+                    <li
+                        class="flex items-center gap-3 bg-white/5 py-1.5 px-3 rounded-md backdrop-blur-sm border border-white/5">
+                        <svg class="w-5 h-5 text-orange shrink-0 drop-shadow-md" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Hedge Trimming
+                    </li>
+                    <li
+                        class="flex items-center gap-3 bg-white/5 py-1.5 px-3 rounded-md backdrop-blur-sm border border-white/5">
+                        <svg class="w-5 h-5 text-orange shrink-0 drop-shadow-md" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Snow Removal
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Instant Quote Box -->
+            <div class="mt-2 mb-4 bg-white rounded-lg p-[0.15in] shadow-2xl relative border-b-4 border-orange">
+                <p
+                    class="font-montserrat font-bold text-center text-[10px] uppercase tracking-widest text-charcoal mb-4">
+                    Your Instant Lawn Mowing Quote
+                </p>
+                <div class="flex items-end justify-center gap-1 mb-2">
+                    <span class="text-3xl font-extrabold text-charcoal leading-none">$</span>
+                    <div class="w-32 border-b-2 border-charcoal/30 h-8 ml-2"></div>
+                </div>
+            </div>
+
+            <!-- Bottom: CTA and QR Code -->
+            <div class="flex items-end justify-between mt-auto">
+
+                <!-- CTA -->
+                <div class="flex flex-col mb-1">
+                    <h2 class="font-sans font-bold text-[10px] uppercase tracking-[0.2em] text-white/70 mb-1">
+                        Call or Text
+                    </h2>
+                    <p class="font-montserrat font-bold text-[28px] text-white leading-none tracking-tighter">
+                        (440) 429-7313
+                    </p>
+                </div>
+
+                <!-- QR Code Block -->
+                <div class="flex flex-col items-center justify-end text-center shrink-0">
+                    <div class="bg-white p-1.5 rounded-lg shadow-xl mb-2 flex items-center justify-center">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wtpropertymaintenance.com&color=0F172A"
+                            alt="QR Code" class="w-[1.1in] h-[1.1in] mix-blend-multiply">
+                    </div>
+                    <p
+                        class="font-sans font-bold text-[8px] uppercase tracking-widest text-white max-w-[1.2in] leading-tight text-center">
+                        Scan for an<br>Instant Quote
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
