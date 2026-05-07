@@ -302,61 +302,47 @@ export default function GalleryPage() {
 function CategoryCarousel({ images, prefersReducedMotion }: { images: GalleryImage[], prefersReducedMotion: boolean | null }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
-  const ticking = useRef(false)
 
   const loopedImages = [...images, ...images, ...images]
   const originalLength = images.length
 
+  const handleScroll = () => {
+    const scrollContainer = scrollRef.current
+    if (!scrollContainer || window.innerWidth >= 1024) return
+
+    const scrollLeft = scrollContainer.scrollLeft
+    const totalScrollWidth = scrollContainer.scrollWidth
+    const cardWidth = totalScrollWidth / (originalLength * 3)
+    const totalWidth = cardWidth * originalLength
+
+    if (scrollLeft <= 0) {
+      scrollContainer.scrollLeft = totalWidth
+    } else if (scrollLeft >= totalWidth * 2) {
+      scrollContainer.scrollLeft = totalWidth
+    }
+
+    const currentScroll = scrollContainer.scrollLeft
+    const relativeIndex = Math.round(currentScroll / cardWidth) % originalLength
+    if (relativeIndex !== activeIndex) {
+      setActiveIndex(relativeIndex)
+    }
+  }
+
   useEffect(() => {
     const scrollContainer = scrollRef.current
-    if (!scrollContainer) return
-
-    const updateScroll = () => {
-      if (window.innerWidth < 1024) {
-        const scrollLeft = scrollContainer.scrollLeft
-        const cardWidth = scrollContainer.offsetWidth * 0.85 + 24
-        const totalWidth = cardWidth * originalLength
-
-        if (scrollLeft <= 0) {
-          scrollContainer.scrollLeft = totalWidth
-        } else if (scrollLeft >= totalWidth * 2) {
-          scrollContainer.scrollLeft = totalWidth
-        }
-
-        const currentScroll = scrollContainer.scrollLeft
-        const relativeIndex = Math.round(currentScroll / cardWidth) % originalLength
-        if (relativeIndex !== activeIndex) {
-          setActiveIndex(relativeIndex)
-        }
-      }
-      ticking.current = false
-    }
-
-    const onScrollHandler = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(updateScroll)
-        ticking.current = true
-      }
-    }
-
-    scrollContainer.addEventListener('scroll', onScrollHandler, { passive: true })
-
-    // Initialize scroll position to the middle set
-    if (window.innerWidth < 1024) {
-      const cardWidth = scrollContainer.offsetWidth * 0.85 + 24
+    if (scrollContainer && window.innerWidth < 1024) {
+      const totalScrollWidth = scrollContainer.scrollWidth
+      const cardWidth = totalScrollWidth / (originalLength * 3)
       scrollContainer.scrollLeft = cardWidth * originalLength
     }
-
-    return () => {
-      scrollContainer.removeEventListener('scroll', onScrollHandler)
-    }
-  }, [originalLength, activeIndex])
+  }, [originalLength])
 
   return (
     <div className="relative">
       <div
         ref={scrollRef}
-        className="flex lg:grid lg:grid-cols-2 gap-6 overflow-x-auto lg:overflow-visible px-0 lg:px-0 snap-x snap-mandatory hide-scrollbar pb-6"
+        onScroll={handleScroll}
+        className="flex lg:grid lg:grid-cols-2 gap-6 overflow-x-auto lg:overflow-visible px-0 lg:px-0 snap-x snap-mandatory scroll-px-0 hide-scrollbar pb-6"
       >
         {(typeof window !== 'undefined' && window.innerWidth < 1024 ? loopedImages : images).map((image, index) => (
           <motion.div
@@ -365,7 +351,7 @@ function CategoryCarousel({ images, prefersReducedMotion }: { images: GalleryIma
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="group relative aspect-[3/2] rounded-xl overflow-hidden bg-muted border border-border shadow-sm snap-center shrink-0 w-[85vw] lg:w-full"
+            className="group relative aspect-[3/2] rounded-xl overflow-hidden bg-muted border border-border shadow-sm snap-center snap-normal shrink-0 w-[85vw] lg:w-full"
           >
             {image.src ? (
               <Image
