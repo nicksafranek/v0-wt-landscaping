@@ -8,27 +8,27 @@ import { TestimonialCard } from "@/components/ui/testimonial-card"
 const BEFORE_AFTER_IMAGES = [
   {
     id: "1",
-    before: "",
-    after: "",
-    location: "Coming Soon",
+    before: "/images/WT_Landscaping/BW%20FRONT%20B.jpeg",
+    after: "/images/WT_Landscaping/BW%20FRONT%20A.jpeg",
+    location: "Cleveland",
   },
   {
     id: "2",
-    before: "",
-    after: "",
-    location: "Coming Soon",
+    before: "/images/WT_Landscaping/BW%20SIDE%20B.jpeg",
+    after: "/images/WT_Landscaping/BW%20SIDE%20A.jpeg",
+    location: "Cleveland",
   },
   {
     id: "3",
-    before: "",
-    after: "",
-    location: "Coming Soon",
+    before: "/images/WT_Landscaping/K1%20FRONT%20B.jpeg",
+    after: "/images/WT_Landscaping/K1%20FRONT%20A.jpeg",
+    location: "Cleveland",
   },
   {
     id: "4",
-    before: "",
-    after: "",
-    location: "Coming Soon",
+    before: "/images/WT_Landscaping/K2%20FRONT%20B.jpeg",
+    after: "/images/WT_Landscaping/K2%20FRONT%20A.jpeg",
+    location: "Cleveland",
   },
 ]
 
