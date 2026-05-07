@@ -84,15 +84,15 @@ export function ServicesGrid() {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="flex md:hidden overflow-x-auto gap-6 pb-8 px-6 snap-x snap-mandatory hide-scrollbar"
+          className="flex md:hidden overflow-x-auto gap-6 pb-8 px-6 snap-x snap-mandatory scroll-px-6 hide-scrollbar"
         >
           {loopedServices.map((service, index) => (
-            <div key={`${service.id}-${index}`} className="flex-shrink-0 w-auto">
-              <DetailedServiceCard
-                service={service}
-                index={index % originalLength}
-              />
-            </div>
+            <DetailedServiceCard
+              key={`${service.id}-${index}`}
+              service={service}
+              index={index % originalLength}
+              className="snap-center snap-always shrink-0"
+            />
           ))}
         </div>
 

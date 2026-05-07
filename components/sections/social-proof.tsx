@@ -128,7 +128,7 @@ export function SocialProof() {
           {/* Comparison Cards Carousel (Mobile/Tablet) / Grid (Desktop) */}
           <div
             ref={scrollRef}
-            className="flex lg:grid lg:grid-cols-2 gap-8 overflow-x-auto lg:overflow-visible px-6 lg:px-0 snap-x snap-mandatory hide-scrollbar pb-8"
+            className="flex lg:grid lg:grid-cols-2 gap-8 overflow-x-auto lg:overflow-visible px-6 lg:px-0 snap-x snap-mandatory scroll-px-6 hide-scrollbar pb-8"
           >
             {(typeof window !== 'undefined' && window.innerWidth < 1024 ? loopedImages : BEFORE_AFTER_IMAGES).map((item, index) => (
               <motion.div
@@ -137,6 +137,7 @@ export function SocialProof() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
+                className="snap-center snap-always shrink-0"
               >
                 <ComparisonCard
                   beforeImage={item.before}
