@@ -42,52 +42,41 @@ export function SocialProof() {
   const loopedImages = [...BEFORE_AFTER_IMAGES, ...BEFORE_AFTER_IMAGES, ...BEFORE_AFTER_IMAGES]
   const originalLength = BEFORE_AFTER_IMAGES.length
 
-  // Handle scroll with requestAnimationFrame and passive listener
+  // Simplified scroll handling matching ServicesGrid
+  const handleScroll = () => {
+    const scrollContainer = scrollRef.current
+    if (!scrollContainer || window.innerWidth >= 1024) return
+
+    const scrollLeft = scrollContainer.scrollLeft
+    // More accurate card width calculation based on total scrollable width
+    const totalScrollWidth = scrollContainer.scrollWidth
+    const cardWidth = totalScrollWidth / (originalLength * 3)
+    const totalWidth = cardWidth * originalLength
+
+    // Infinite Loop Logic
+    if (scrollLeft <= 0) {
+      scrollContainer.scrollLeft = totalWidth
+    } else if (scrollLeft >= totalWidth * 2) {
+      scrollContainer.scrollLeft = totalWidth
+    }
+
+    // Update active index for dots
+    const currentScroll = scrollContainer.scrollLeft
+    const relativeIndex = Math.round(currentScroll / cardWidth) % originalLength
+    if (relativeIndex !== activeIndex) {
+      setActiveIndex(relativeIndex)
+    }
+  }
+
+  // Initial scroll position
   useEffect(() => {
     const scrollContainer = scrollRef.current
-    if (!scrollContainer) return
-
-    const updateScroll = () => {
-      if (window.innerWidth < 1024) {
-        const scrollLeft = scrollContainer.scrollLeft
-        const cardWidth = scrollContainer.offsetWidth * 0.85 + 32
-        const totalWidth = cardWidth * originalLength
-
-        if (scrollLeft <= 0) {
-          scrollContainer.scrollLeft = totalWidth
-        } else if (scrollLeft >= totalWidth * 2) {
-          scrollContainer.scrollLeft = totalWidth
-        }
-
-        const currentScroll = scrollContainer.scrollLeft
-        const relativeIndex = Math.round(currentScroll / cardWidth) % originalLength
-        if (relativeIndex !== activeIndex) {
-          setActiveIndex(relativeIndex)
-        }
-      }
-      ticking.current = false
-    }
-
-    const onScrollHandler = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(updateScroll)
-        ticking.current = true
-      }
-    }
-
-    // Manual listener for passive: true support
-    scrollContainer.addEventListener('scroll', onScrollHandler, { passive: true })
-
-    // Initialize scroll position to the middle set
-    if (window.innerWidth < 1024) {
-      const cardWidth = scrollContainer.offsetWidth * 0.85 + 32
+    if (scrollContainer && window.innerWidth < 1024) {
+      const totalScrollWidth = scrollContainer.scrollWidth
+      const cardWidth = totalScrollWidth / (originalLength * 3)
       scrollContainer.scrollLeft = cardWidth * originalLength
     }
-
-    return () => {
-      scrollContainer.removeEventListener('scroll', onScrollHandler)
-    }
-  }, [originalLength, activeIndex])
+  }, [originalLength])
 
   return (
     <>
@@ -128,6 +117,7 @@ export function SocialProof() {
           {/* Comparison Cards Carousel (Mobile/Tablet) / Grid (Desktop) */}
           <div
             ref={scrollRef}
+            onScroll={handleScroll}
             className="flex lg:grid lg:grid-cols-2 gap-8 overflow-x-auto lg:overflow-visible px-6 lg:px-0 snap-x snap-mandatory scroll-px-6 hide-scrollbar pb-8"
           >
             {(typeof window !== 'undefined' && window.innerWidth < 1024 ? loopedImages : BEFORE_AFTER_IMAGES).map((item, index) => (
@@ -137,7 +127,7 @@ export function SocialProof() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="snap-center snap-always shrink-0"
+                className="snap-center snap-always shrink-0 w-[85vw] lg:w-full"
               >
                 <ComparisonCard
                   beforeImage={item.before}
