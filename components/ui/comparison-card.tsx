@@ -23,7 +23,7 @@ export function ComparisonCard({
             {/* Image Grid */}
             <div className="grid grid-cols-2 gap-0.5 bg-slate-200">
                 {/* Before Image */}
-                <div className="relative group/before overflow-hidden aspect-square bg-muted flex items-center justify-center">
+                <div className="relative group/before overflow-hidden aspect-[4/3] bg-muted flex items-center justify-center">
                     <div className="absolute top-4 left-4 z-10">
                         <span className="px-3 py-1 text-xs font-bold text-white bg-black/60 backdrop-blur-md rounded-full shadow-lg">
                             BEFORE
@@ -35,7 +35,7 @@ export function ComparisonCard({
                             alt={beforeAlt}
                             fill
                             quality={95}
-                            className="object-cover"
+                            className="object-cover object-center"
                             sizes="(max-width: 640px) 100vw, 50vw"
                         />
                     ) : (
@@ -48,7 +48,7 @@ export function ComparisonCard({
                 </div>
 
                 {/* After Image */}
-                <div className="relative group/after overflow-hidden aspect-square bg-muted flex items-center justify-center">
+                <div className="relative group/after overflow-hidden aspect-[4/3] bg-muted flex items-center justify-center">
                     <div className="absolute top-4 left-4 z-10">
                         <span className="px-3 py-1 text-xs font-bold text-white bg-orange/90 backdrop-blur-md rounded-full shadow-lg">
                             AFTER
@@ -60,7 +60,7 @@ export function ComparisonCard({
                             alt={afterAlt}
                             fill
                             quality={95}
-                            className="object-cover"
+                            className="object-cover object-center"
                             sizes="(max-width: 640px) 100vw, 50vw"
                         />
                     ) : (
