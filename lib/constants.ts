@@ -169,18 +169,10 @@ export interface Testimonial {
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    id: "1",
-    quote: "WT Property Maintenance transformed our backyard in Strongsville. They were on time, professional, and the mulch looks incredible. Highly recommend!",
-    author: "Sarah M.",
-    location: "Strongsville Resident",
-    rating: 5,
-    image: "/testimonials/sarah-m.webp",
-  },
-  {
     id: "2",
     quote: "I would absolutely recommend this company. Pricing was reasonable. The quality of their services was excellent. They Provided on the spot service as well. I was extremely pleased with their services and pricing. It was very nice to hire a company who cares about the quality of their work and performance. Thank you so much!",
     author: "Antoinette M.",
-    location: "Google Review",
+    location: "Yelp Review",
     rating: 5,
   },
 ] as const

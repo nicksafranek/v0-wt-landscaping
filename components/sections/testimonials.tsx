@@ -34,7 +34,7 @@ export function Testimonials() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div className={`grid grid-cols-1 ${TESTIMONIALS.length > 1 ? 'md:grid-cols-2' : 'max-w-3xl mx-auto'} gap-8 lg:gap-12`}>
           {TESTIMONIALS.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
