@@ -176,6 +176,13 @@ export const TESTIMONIALS: Testimonial[] = [
     rating: 5,
     image: "/testimonials/sarah-m.webp",
   },
+  {
+    id: "2",
+    quote: "I would absolutely recommend this company. Pricing was reasonable. The quality of their services was excellent. They Provided on the spot service as well. I was extremely pleased with their services and pricing. It was very nice to hire a company who cares about the quality of their work and performance. Thank you so much!",
+    author: "Antoinette M.",
+    location: "Google Review",
+    rating: 5,
+  },
 ] as const
 
 // Navigation Links

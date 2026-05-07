@@ -23,39 +23,51 @@ export function ComparisonCard({
             {/* Image Grid */}
             <div className="grid grid-cols-2 gap-0.5 bg-slate-200">
                 {/* Before Image */}
-                <div className="relative group/before overflow-hidden aspect-square bg-muted">
+                <div className="relative group/before overflow-hidden aspect-square bg-muted flex items-center justify-center">
                     <div className="absolute top-4 left-4 z-10">
                         <span className="px-3 py-1 text-xs font-bold text-white bg-black/60 backdrop-blur-md rounded-full shadow-lg">
                             BEFORE
                         </span>
                     </div>
-                    <Image
-                        src={beforeImage}
-                        alt={beforeAlt}
-                        fill
-                        quality={95}
-                        className="object-cover"
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                    />
+                    {beforeImage ? (
+                        <Image
+                            src={beforeImage}
+                            alt={beforeAlt}
+                            fill
+                            quality={95}
+                            className="object-cover"
+                            sizes="(max-width: 640px) 100vw, 50vw"
+                        />
+                    ) : (
+                        <div className="flex flex-col items-center gap-2 text-muted-foreground/40">
+                            <span className="text-xs font-medium tracking-widest">COMING SOON</span>
+                        </div>
+                    )}
                     {/* Soft Inner Shadow Overlay - Deepened */}
                     <div className="absolute inset-0 pointer-events-none shadow-[inset_0_2px_45px_rgba(0,0,0,0.15)] z-10" />
                 </div>
 
                 {/* After Image */}
-                <div className="relative group/after overflow-hidden aspect-square bg-muted">
+                <div className="relative group/after overflow-hidden aspect-square bg-muted flex items-center justify-center">
                     <div className="absolute top-4 left-4 z-10">
                         <span className="px-3 py-1 text-xs font-bold text-white bg-orange/90 backdrop-blur-md rounded-full shadow-lg">
                             AFTER
                         </span>
                     </div>
-                    <Image
-                        src={afterImage}
-                        alt={afterAlt}
-                        fill
-                        quality={95}
-                        className="object-cover"
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                    />
+                    {afterImage ? (
+                        <Image
+                            src={afterImage}
+                            alt={afterAlt}
+                            fill
+                            quality={95}
+                            className="object-cover"
+                            sizes="(max-width: 640px) 100vw, 50vw"
+                        />
+                    ) : (
+                        <div className="flex flex-col items-center gap-2 text-muted-foreground/40">
+                            <span className="text-xs font-medium tracking-widest">COMING SOON</span>
+                        </div>
+                    )}
                     {/* Soft Inner Shadow Overlay - Deepened */}
                     <div className="absolute inset-0 pointer-events-none shadow-[inset_0_2px_45px_rgba(0,0,0,0.15)] z-10" />
                 </div>

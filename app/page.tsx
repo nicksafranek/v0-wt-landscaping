@@ -8,6 +8,7 @@ import { Hero } from "@/components/sections/hero"
 import { ServicesGrid } from "@/components/sections/services-grid"
 import { ServiceAreas } from "@/components/sections/service-areas"
 import { SocialProof } from "@/components/sections/social-proof"
+import { Testimonials } from "@/components/sections/testimonials"
 import { QuoteModal } from "@/components/ui/quote-modal"
 import { QuoteDrawer } from "@/components/ui/quote-drawer"
 
@@ -26,6 +27,7 @@ export default function HomePage() {
         <ServicesGrid />
         <ServiceAreas />
         <SocialProof />
+        <Testimonials />
       </main>
 
       <Footer />
