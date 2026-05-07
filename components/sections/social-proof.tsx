@@ -8,27 +8,27 @@ import { TestimonialCard } from "@/components/ui/testimonial-card"
 const BEFORE_AFTER_IMAGES = [
   {
     id: "1",
-    before: "/images/WT_Landscaping/BW%20FRONT%20B.jpeg",
-    after: "/images/WT_Landscaping/BW%20FRONT%20A.jpeg",
-    location: "Cleveland",
+    before: "/images/WT_Landscaping/BW FRONT B.jpeg",
+    after: "/images/WT_Landscaping/BW FRONT A.jpeg",
+    location: "Cleveland Area",
   },
   {
     id: "2",
-    before: "/images/WT_Landscaping/BW%20SIDE%20B.jpeg",
-    after: "/images/WT_Landscaping/BW%20SIDE%20A.jpeg",
-    location: "Cleveland",
+    before: "/images/WT_Landscaping/BW SIDE B.jpeg",
+    after: "/images/WT_Landscaping/BW SIDE A.jpeg",
+    location: "Cleveland Area",
   },
   {
     id: "3",
-    before: "/images/WT_Landscaping/K1%20FRONT%20B.jpeg",
-    after: "/images/WT_Landscaping/K1%20FRONT%20A.jpeg",
-    location: "Cleveland",
+    before: "/images/WT_Landscaping/K1 FRONT B.jpeg",
+    after: "/images/WT_Landscaping/K1 FRONT A.jpeg",
+    location: "Cleveland Area",
   },
   {
     id: "4",
-    before: "/images/WT_Landscaping/K2%20FRONT%20B.jpeg",
-    after: "/images/WT_Landscaping/K2%20FRONT%20A.jpeg",
-    location: "Cleveland",
+    before: "/images/WT_Landscaping/K2 FRONT B.jpeg",
+    after: "/images/WT_Landscaping/K2 FRONT A.jpeg",
+    location: "Cleveland Area",
   },
 ]
 
