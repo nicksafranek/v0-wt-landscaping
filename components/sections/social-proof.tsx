@@ -127,7 +127,7 @@ export function SocialProof() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="snap-center snap-always shrink-0 w-[85vw] lg:w-full"
+                className="snap-center snap-normal shrink-0 w-[85vw] lg:w-full"
               >
                 <ComparisonCard
                   beforeImage={item.before}

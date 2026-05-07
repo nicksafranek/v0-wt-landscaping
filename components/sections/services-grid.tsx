@@ -91,7 +91,7 @@ export function ServicesGrid() {
               key={`${service.id}-${index}`}
               service={service}
               index={index % originalLength}
-              className="snap-center snap-always shrink-0"
+              className="snap-center snap-normal shrink-0"
             />
           ))}
         </div>
